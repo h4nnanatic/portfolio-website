@@ -45,7 +45,7 @@ export default function GalleryClient({ images }: GalleryClientProps) {
                         >
                             {/* Image */}
                             <img
-                                src={`/work/${img}`}
+                                src={`/work/${encodeURIComponent(img)}`}
                                 alt={`Poster artwork ${i + 1}`}
                                 className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                                 loading="lazy"
