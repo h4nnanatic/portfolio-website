@@ -16,6 +16,10 @@ const FEATURED_WORKS = [
   "CXO MEETUP.jpg",
   "annual dinner.png",
   "sports fest.png",
+  "_sarautomation.png",
+  "sarzone automation.png",
+  "httpsportals.numl.edu.pk AdmissionPortalLogin.png",
+  "Beige and Black Minimalist Fashion Store Logo.png"
 ];
 
 const TITLE_OVERRIDES: Record<string, string> = {
