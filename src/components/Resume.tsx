@@ -290,7 +290,7 @@ export default function Resume() {
               </div>
             </div>
 
-            <div className="grid gap-4 rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl lg:col-span-5">
+            <div className="flex flex-col justify-center gap-6 rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-xl lg:col-span-5 h-full">
               <a href="mailto:hannanrasool3@gmail.com" className="group flex items-center gap-4">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition-colors group-hover:bg-emerald-500/20 group-hover:text-emerald-400">
                   <Mail className="h-4 w-4" />
