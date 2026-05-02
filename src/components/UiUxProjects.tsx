@@ -86,11 +86,7 @@ export default function UiUxProjects() {
                     className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-                <div className="border-t border-white/10 p-5 bg-[#0a0a0a]">
-                  <p className="text-sm font-medium text-gray-200 truncate">
-                    {screen.replace('.png', '').replace(' - JVO Labs', '').replace(' with Office Image', '')}
-                  </p>
-                </div>
+
               </motion.div>
             ))}
           </div>
@@ -128,11 +124,7 @@ export default function UiUxProjects() {
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-end p-5">
-                  <p className="text-sm font-semibold text-white drop-shadow-md leading-tight">
-                    {screen.replace('.png', '').replace(' Screen', '')}
-                  </p>
-                </div>
+
               </motion.div>
             ))}
           </div>
