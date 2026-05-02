@@ -1,13 +1,17 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Image as ImageIcon } from "lucide-react";
-// Next Image is generally better, but for a masonry layout of arbitrary dynamic images from fs, standard <img> or Next Image with unoptimized flags can work.
-// Standard `<img />` works flawlessly with generic masonry CSS widths.
 
 interface GalleryClientProps {
-    images: string[];
+    images: {
+        src: string;
+        alt: string;
+        width: number;
+        height: number;
+    }[];
 }
 
 export default function GalleryClient({ images }: GalleryClientProps) {
@@ -36,19 +40,22 @@ export default function GalleryClient({ images }: GalleryClientProps) {
                 <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
                     {images.map((img, i) => (
                         <motion.div
-                            key={i}
+                            key={img.src}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.5, delay: (i % 6) * 0.1 }}
                             className="break-inside-avoid relative group rounded-2xl overflow-hidden bg-white/5 border border-white/10"
                         >
-                            {/* Image */}
-                            <img
-                                src={`/work/${encodeURIComponent(img)}`}
-                                alt={`Poster artwork ${i + 1}`}
+                            <Image
+                                src={img.src}
+                                alt={img.alt}
+                                width={img.width}
+                                height={img.height}
+                                priority={i < 4}
+                                quality={68}
+                                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                                 className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-                                loading="lazy"
                             />
 
                             {/* Hover Overlay */}
