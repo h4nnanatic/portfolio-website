@@ -34,7 +34,7 @@ const LUMIN_SCREENS = [
 
 export default function UiUxProjects() {
   return (
-    <section className="relative z-20 min-h-screen bg-[#070707] px-6 py-32 border-t border-white/5">
+    <section id="uiux" className="relative z-20 min-h-screen bg-[#070707] px-6 py-32 border-t border-white/5">
       <div className="mx-auto max-w-7xl text-white">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

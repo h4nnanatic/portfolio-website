@@ -231,7 +231,7 @@ export default function Resume() {
   ];
 
   return (
-    <div className="relative z-20 min-h-screen overflow-hidden bg-[#0a0a0a] px-6 py-28 md:py-32">
+    <div id="about" className="relative z-20 min-h-screen overflow-hidden bg-[#0a0a0a] px-6 py-28 md:py-32">
       <motion.div
         animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
@@ -321,7 +321,7 @@ export default function Resume() {
 
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
           <div className="space-y-24 lg:col-span-8">
-            <section>
+            <section id="experience">
               <div className="mb-10 flex items-center gap-4">
                 <Briefcase className="h-8 w-8 text-neutral-400" />
                 <h3 className="text-3xl font-bold tracking-tight">Experience</h3>

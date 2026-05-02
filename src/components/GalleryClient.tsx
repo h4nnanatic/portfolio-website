@@ -67,7 +67,7 @@ export default function GalleryClient({ images }: GalleryClientProps) {
   };
 
   return (
-    <div className="relative z-20 min-h-screen bg-[#0a0a0a] px-6 py-32">
+    <div id="gallery" className="relative z-20 min-h-screen bg-[#0a0a0a] px-6 py-32">
       <motion.div
         animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.9, 0.5] }}
         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}

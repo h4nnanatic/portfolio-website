@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   description: "A high-end scrollytelling personal portfolio",
 };
 
+import CustomCursor from "@/components/CustomCursor";
+import FloatingNav from "@/components/FloatingNav";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -20,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans antialiased bg-[#121212] text-[#ededed]`}>
+        <CustomCursor />
         {children}
+        <FloatingNav />
       </body>
     </html>
   );
