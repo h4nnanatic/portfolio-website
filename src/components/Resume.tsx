@@ -5,11 +5,14 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import {
   Award,
+  BarChart3,
   Briefcase,
+  Brush,
   CheckCircle2,
   Download,
   GraduationCap,
   LayoutTemplate,
+  Layers3,
   Mail,
   MapPin,
   Megaphone,
@@ -37,10 +40,12 @@ interface SkillCategory {
 
 interface MarketingProject {
   name: string;
+  campaignType: string;
+  spotlight: string;
   focus: string;
   tools: string[];
   outcomes: string[];
-  image?: string;
+  image: string;
   accent: "emerald" | "amber" | "cyan";
 }
 
@@ -68,6 +73,24 @@ const accentStyles: Record<
     fallback: "from-cyan-500/25 to-blue-800/30",
   },
 };
+
+const marketingValueCards = [
+  {
+    title: "Performance Marketing",
+    detail: "Meta Ads strategy, audience targeting, and campaign iteration loops.",
+    icon: <BarChart3 className="h-5 w-5 text-emerald-400" />,
+  },
+  {
+    title: "Creative Production",
+    detail: "Product retouching, poster design, and content assets for social channels.",
+    icon: <Brush className="h-5 w-5 text-amber-400" />,
+  },
+  {
+    title: "Brand Systems",
+    detail: "Visual consistency across rebranding, UI touchpoints, and social identity.",
+    icon: <Layers3 className="h-5 w-5 text-cyan-400" />,
+  },
+];
 
 export default function Resume() {
   const experiences: ExperienceItem[] = [
@@ -163,6 +186,8 @@ export default function Resume() {
   const marketingProjects: MarketingProject[] = [
     {
       name: "Elieens Organic",
+      campaignType: "Organic Health & Beauty",
+      spotlight: "Product storytelling + paid social execution",
       focus: "Product-focused social growth and Meta Ads execution.",
       tools: ["Adobe Photoshop", "Canva", "Meta Ads", "Content Planning"],
       outcomes: [
@@ -171,10 +196,13 @@ export default function Resume() {
         "Managed social media posting rhythm and platform consistency.",
         "Ran Facebook and Instagram ad campaigns to drive product awareness and sales.",
       ],
+      image: "/brands/eleens-organic.png",
       accent: "emerald",
     },
     {
       name: "Fragrant Fusion",
+      campaignType: "Luxury Fragrance Brand",
+      spotlight: "Visual identity support + conversion-focused creatives",
       focus: "Visual identity support plus ad-driven reach campaigns.",
       tools: ["Adobe Photoshop", "Meta Ads", "Social Media Marketing", "Creative Design"],
       outcomes: [
@@ -183,10 +211,13 @@ export default function Resume() {
         "Maintained content scheduling and engagement across social channels.",
         "Executed audience-targeted Meta Ads to improve reach and conversions.",
       ],
+      image: "/brands/fragrant-fusion.png",
       accent: "amber",
     },
     {
       name: "JVO Labs",
+      campaignType: "Software & Digital Services",
+      spotlight: "Complete rebranding and digital identity modernization",
       focus: "Full rebranding and digital brand consistency program.",
       tools: ["Brand Strategy", "UI/UX Mockups", "Social Content", "Visual Identity"],
       outcomes: [
@@ -194,7 +225,7 @@ export default function Resume() {
         "Designed UI/UX layouts to improve clarity across digital touchpoints.",
         "Produced social media creatives aligned to the new brand system.",
       ],
-      image: "/work/jvolabs.png",
+      image: "/brands/jvo-logo-page.png",
       accent: "cyan",
     },
   ];
@@ -401,6 +432,28 @@ export default function Resume() {
           </div>
         </div>
 
+        <section className="mt-20">
+          <div className="mb-7 flex items-center gap-3">
+            <Sparkles className="h-6 w-6 text-emerald-400" />
+            <h3 className="text-2xl font-bold tracking-tight md:text-3xl">Marketing Value Stack</h3>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {marketingValueCards.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all hover:-translate-y-0.5 hover:bg-white/[0.05]"
+              >
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5">
+                  {item.icon}
+                </div>
+                <h4 className="mb-2 text-base font-semibold text-white">{item.title}</h4>
+                <p className="text-sm leading-relaxed text-gray-400">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <motion.section
           id="marketing-projects"
           initial={{ opacity: 0, y: 24 }}
@@ -424,12 +477,6 @@ export default function Resume() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
             {marketingProjects.map((project, index) => {
               const accent = accentStyles[project.accent];
-              const projectInitials = project.name
-                .split(" ")
-                .map((word) => word[0])
-                .join("")
-                .slice(0, 2)
-                .toUpperCase();
 
               return (
                 <motion.article
@@ -441,32 +488,41 @@ export default function Resume() {
                   className={`group rounded-3xl border border-white/10 bg-white/[0.02] p-6 transition-all hover:-translate-y-1 hover:bg-white/[0.04] ${accent.ring}`}
                 >
                   <div className="mb-4 flex items-center justify-between gap-3">
-                    <h4 className="text-xl font-semibold text-white">{project.name}</h4>
+                    <div>
+                      <h4 className="text-xl font-semibold text-white">{project.name}</h4>
+                      <p className="mt-1 text-xs uppercase tracking-wide text-gray-400">{project.campaignType}</p>
+                    </div>
                     <span className={`rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide ${accent.badge}`}>
-                      Case Study
+                      Featured
                     </span>
                   </div>
 
                   <div className="mb-6 overflow-hidden rounded-2xl border border-white/10">
-                    {project.image ? (
-                      <Image
-                        src={project.image}
-                        alt={`${project.name} project preview`}
-                        width={1200}
-                        height={720}
-                        className="h-44 w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    ) : (
-                      <div
-                        className={`flex h-44 w-full items-center justify-center bg-gradient-to-br ${accent.fallback}`}
-                        aria-hidden="true"
-                      >
-                        <span className="text-6xl font-black tracking-tight text-white/80">{projectInitials}</span>
-                      </div>
-                    )}
+                    <Image
+                      src={project.image}
+                      alt={`${project.name} project preview`}
+                      width={1200}
+                      height={720}
+                      quality={72}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                      className="h-44 w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
                   </div>
 
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-gray-500">{project.spotlight}</p>
                   <p className="mb-5 text-sm leading-relaxed text-gray-300">{project.focus}</p>
+
+                  <div className="mb-5 grid grid-cols-3 gap-2">
+                    <div className={`rounded-lg border border-white/10 bg-black/20 px-2.5 py-2 text-center text-xs font-semibold ${accent.badge}`}>
+                      {project.tools.length} Tools
+                    </div>
+                    <div className={`rounded-lg border border-white/10 bg-black/20 px-2.5 py-2 text-center text-xs font-semibold ${accent.badge}`}>
+                      {project.outcomes.length} Outcomes
+                    </div>
+                    <div className={`rounded-lg border border-white/10 bg-black/20 px-2.5 py-2 text-center text-xs font-semibold ${accent.badge}`}>
+                      Case Card
+                    </div>
+                  </div>
 
                   <div className="mb-5 flex flex-wrap gap-2">
                     {project.tools.map((tool) => (

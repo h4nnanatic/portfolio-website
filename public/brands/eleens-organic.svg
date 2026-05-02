@@ -1,0 +1,10 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" fill="#0B1110"/>
+  <g transform="translate(600 175)">
+    <path d="M0 150 C-20 120 -20 78 0 40 C20 78 20 120 0 150Z" fill="#2A7A39"/>
+    <ellipse cx="-95" cy="20" rx="115" ry="62" transform="rotate(-30)" fill="#2A7A39"/>
+    <ellipse cx="95" cy="20" rx="115" ry="62" transform="rotate(30)" fill="#2A7A39"/>
+  </g>
+  <text x="600" y="430" text-anchor="middle" fill="#2A7A39" font-family="Georgia, 'Times New Roman', serif" font-size="170" font-weight="700" letter-spacing="1">Eleen’s</text>
+  <text x="600" y="545" text-anchor="middle" fill="#2A7A39" font-family="Arial, Helvetica, sans-serif" font-size="88" font-weight="700" letter-spacing="22">ORGANIC</text>
+</svg>
