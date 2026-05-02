@@ -227,7 +227,7 @@ export default function GalleryClient({ images }: GalleryClientProps) {
                     fill
                     quality={70}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover transition-all duration-700 group-hover:object-contain group-hover:scale-100 group-active:object-contain group-active:scale-100"
                   />
                 </div>
 
