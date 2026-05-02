@@ -19,18 +19,6 @@ const FILTERS: { id: GalleryFilter; label: string }[] = [
   { id: "branding", label: "Branding" },
 ];
 
-function kindLabel(kind: GalleryImage["kind"]) {
-  switch (kind) {
-    case "poster":
-      return "Poster";
-    case "banner":
-      return "Banner";
-    case "branding":
-      return "Branding";
-    default:
-      return "Design";
-  }
-}
 
 export default function GalleryClient({ images }: GalleryClientProps) {
   const [activeFilter, setActiveFilter] = useState<GalleryFilter>("all");
@@ -151,14 +139,6 @@ export default function GalleryClient({ images }: GalleryClientProps) {
                       className="object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/30 to-black/20" />
-                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/75">
-                        {kindLabel(featuredImages[safeSlideIndex].kind)}
-                      </p>
-                      <h4 className="max-w-3xl text-lg font-semibold text-white md:text-2xl">
-                        {featuredImages[safeSlideIndex].title}
-                      </h4>
-                    </div>
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -231,14 +211,7 @@ export default function GalleryClient({ images }: GalleryClientProps) {
                   />
                 </div>
 
-                <div className="flex items-center justify-between gap-3 border-t border-white/10 px-4 py-3">
-                  <h4 className="line-clamp-1 text-sm font-medium text-gray-200">
-                    {image.title}
-                  </h4>
-                  <span className="rounded-full border border-white/15 bg-black/30 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-gray-300">
-                    {kindLabel(image.kind)}
-                  </span>
-                </div>
+
               </motion.article>
             ))}
           </div>
