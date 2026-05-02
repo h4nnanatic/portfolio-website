@@ -9,92 +9,185 @@ const WORK_DIR = path.join(process.cwd(), "public", "work");
 const FALLBACK_WIDTH = 1200;
 const FALLBACK_HEIGHT = 1600;
 
-const GENERIC_NAME_PATTERNS = [
-  /^untitled/i,
-  /^frame\s+\d+/i,
-  /^gemini_generated_image/i,
+const FEATURED_WORKS = [
+  "jvolabs.png",
+  "Sports Fest Intramurals Banner in Blue and Neon Green Illustrative Style(1).png",
+  "National University of Modern Languages (Faisalabad Campus) INDOOR SPORTS FEST.png",
+  "CXO MEETUP.jpg",
+  "annual dinner.png",
+  "sports fest.png",
 ];
+
+const TITLE_OVERRIDES: Record<string, string> = {
+  "httpsportals.numl.edu.pk AdmissionPortalLogin.png": "Admission Portal Campaign Creative",
+  "_sarautomation.png": "SAR Automation Campaign",
+  "sarzone automation.png": "SAR Zone Automation Design",
+};
+
+const GENERIC_NAME_PATTERNS = [/^untitled/i, /^frame\s+\d+/i, /^gemini_generated_image/i];
+
+type WorkKind = "poster" | "banner" | "branding";
+
+export interface GalleryImage {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  fileName: string;
+  title: string;
+  kind: WorkKind;
+  featured: boolean;
+  featuredOrder: number;
+}
 
 function stripExtension(value: string) {
   return value.replace(/\.[^/.]+$/, "");
 }
 
-function getPosterBucket(fileName: string) {
-  const baseName = stripExtension(fileName).toLowerCase().trim();
-
-  if (GENERIC_NAME_PATTERNS.some((pattern) => pattern.test(baseName))) {
-    return 2;
+function prettifyTitle(fileName: string) {
+  const override = TITLE_OVERRIDES[fileName];
+  if (override) {
+    return override;
   }
 
-  if (/^\d+(\s*\(\d+\))?$/.test(baseName)) {
-    return 1;
-  }
-
-  return 0;
+  return stripExtension(fileName)
+    .replace(/_/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
-function getNumericSortMeta(fileName: string) {
-  const baseName = stripExtension(fileName).trim();
-  const match = baseName.match(/^(\d+)(?:\s*\((\d+)\))?$/);
+function classifyWork(fileName: string, width: number, height: number): WorkKind {
+  const baseName = stripExtension(fileName).toLowerCase();
+  const ratio = width / height;
+
+  if (
+    ratio >= 1.6 ||
+    /banner|meetup|sports fest|jvolabs|annual dinner|cxo/i.test(baseName)
+  ) {
+    return "banner";
+  }
+
+  if (/logo|automation|identity|brand/i.test(baseName)) {
+    return "branding";
+  }
+
+  return "poster";
+}
+
+function numericMeta(fileName: string) {
+  const match = stripExtension(fileName).trim().match(/^(\d+)(?:\s*\((\d+)\))?$/);
   if (!match) {
     return null;
   }
 
   return {
-    number: Number(match[1]),
-    duplicateIndex: match[2] ? Number(match[2]) : 0,
+    value: Number(match[1]),
+    duplicate: match[2] ? Number(match[2]) : 0,
   };
 }
 
-const orderedPosters = [...POSTERS].sort((a, b) => {
-  const bucketA = getPosterBucket(a);
-  const bucketB = getPosterBucket(b);
-  if (bucketA !== bucketB) {
-    return bucketA - bucketB;
+function sortKeyForFile(fileName: string) {
+  const baseName = stripExtension(fileName).toLowerCase().trim();
+  const numeric = numericMeta(fileName);
+
+  if (numeric) {
+    return {
+      bucket: 0,
+      numericValue: numeric.value,
+      duplicateValue: numeric.duplicate,
+      text: "",
+    };
   }
 
-  if (bucketA === 1) {
-    const metaA = getNumericSortMeta(a);
-    const metaB = getNumericSortMeta(b);
-    if (metaA && metaB) {
-      if (metaA.number !== metaB.number) {
-        return metaA.number - metaB.number;
-      }
-      return metaA.duplicateIndex - metaB.duplicateIndex;
-    }
+  if (GENERIC_NAME_PATTERNS.some((pattern) => pattern.test(baseName))) {
+    return {
+      bucket: 2,
+      numericValue: Number.MAX_SAFE_INTEGER,
+      duplicateValue: Number.MAX_SAFE_INTEGER,
+      text: baseName,
+    };
   }
 
-  return a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" });
-});
+  return {
+    bucket: 1,
+    numericValue: Number.MAX_SAFE_INTEGER,
+    duplicateValue: Number.MAX_SAFE_INTEGER,
+    text: baseName,
+  };
+}
+
+function compareForGallery(a: GalleryImage, b: GalleryImage) {
+  const featuredDiff = a.featuredOrder - b.featuredOrder;
+  if (featuredDiff !== 0) {
+    return featuredDiff;
+  }
+
+  const kindOrder: Record<WorkKind, number> = {
+    poster: 0,
+    banner: 1,
+    branding: 2,
+  };
+  const kindDiff = kindOrder[a.kind] - kindOrder[b.kind];
+  if (kindDiff !== 0) {
+    return kindDiff;
+  }
+
+  const keyA = sortKeyForFile(a.fileName);
+  const keyB = sortKeyForFile(b.fileName);
+
+  if (keyA.bucket !== keyB.bucket) {
+    return keyA.bucket - keyB.bucket;
+  }
+
+  if (keyA.numericValue !== keyB.numericValue) {
+    return keyA.numericValue - keyB.numericValue;
+  }
+
+  if (keyA.duplicateValue !== keyB.duplicateValue) {
+    return keyA.duplicateValue - keyB.duplicateValue;
+  }
+
+  return keyA.text.localeCompare(keyB.text, undefined, {
+    numeric: true,
+    sensitivity: "base",
+  });
+}
 
 const getGalleryImages = cache(async () => {
   const images = await Promise.all(
-    orderedPosters.map(async (fileName, index) => {
+    POSTERS.map(async (fileName, index) => {
       const filePath = path.join(WORK_DIR, fileName);
       const encodedName = encodeURIComponent(fileName);
+
+      let width = FALLBACK_WIDTH;
+      let height = FALLBACK_HEIGHT;
 
       try {
         const fileBuffer = await fs.readFile(filePath);
         const dimensions = imageSize(fileBuffer);
-
-        return {
-          src: `/work/${encodedName}`,
-          alt: `Poster artwork ${index + 1}`,
-          width: dimensions.width ?? FALLBACK_WIDTH,
-          height: dimensions.height ?? FALLBACK_HEIGHT,
-        };
+        width = dimensions.width ?? FALLBACK_WIDTH;
+        height = dimensions.height ?? FALLBACK_HEIGHT;
       } catch {
-        return {
-          src: `/work/${encodedName}`,
-          alt: `Poster artwork ${index + 1}`,
-          width: FALLBACK_WIDTH,
-          height: FALLBACK_HEIGHT,
-        };
+        // fall back to default dimensions if a file can't be read
       }
+
+      const featuredOrder = FEATURED_WORKS.indexOf(fileName);
+
+      return {
+        src: `/work/${encodedName}`,
+        alt: `Poster artwork ${index + 1}`,
+        width,
+        height,
+        fileName,
+        title: prettifyTitle(fileName),
+        kind: classifyWork(fileName, width, height),
+        featured: featuredOrder >= 0,
+        featuredOrder: featuredOrder >= 0 ? featuredOrder : Number.MAX_SAFE_INTEGER,
+      } satisfies GalleryImage;
     }),
   );
 
-  return images;
+  return images.sort(compareForGallery);
 });
 
 export default async function Gallery() {
