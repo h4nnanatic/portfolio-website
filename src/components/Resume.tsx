@@ -305,16 +305,7 @@ export default function Resume() {
                 <span className="text-gray-300 transition-colors group-hover:text-white">03391500217</span>
               </a>
 
-              <div className="flex items-center gap-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5">
-                  <MapPin className="h-4 w-4 text-gray-400" />
-                </div>
-                <span className="text-sm leading-tight text-gray-400 md:text-base">
-                  House 8, St 11, Z Block Madina Town,
-                  <br />
-                  Faisalabad, Pakistan
-                </span>
-              </div>
+
             </div>
           </div>
         </motion.div>
