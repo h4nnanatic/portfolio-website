@@ -232,8 +232,16 @@ export default function Resume() {
 
   return (
     <div className="relative z-20 min-h-screen overflow-hidden bg-[#0a0a0a] px-6 py-28 md:py-32">
-      <div className="pointer-events-none absolute left-1/4 top-0 h-[500px] w-[500px] rounded-full bg-purple-500/10 blur-[120px]" />
-      <div className="pointer-events-none absolute bottom-1/4 right-0 h-[600px] w-[600px] rounded-full bg-emerald-500/5 blur-[150px]" />
+      <motion.div
+        animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="pointer-events-none absolute left-1/4 top-0 h-[500px] w-[500px] rounded-full bg-purple-500/10 blur-[120px]" 
+      />
+      <motion.div
+        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="pointer-events-none absolute bottom-1/4 right-0 h-[600px] w-[600px] rounded-full bg-emerald-500/5 blur-[150px]" 
+      />
 
       <div className="relative z-10 mx-auto max-w-6xl text-white">
         <motion.div
@@ -276,10 +284,11 @@ export default function Resume() {
                   download
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-black shadow-lg shadow-emerald-500/30 transition-all hover:-translate-y-0.5 hover:bg-emerald-400"
+                  className="group relative inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-black shadow-lg shadow-emerald-500/30 transition-all hover:-translate-y-1 hover:shadow-emerald-500/50 overflow-hidden"
                 >
-                  <Download className="h-4 w-4" />
-                  Download Resume
+                  <span className="absolute inset-0 bg-white/20 translate-y-full transition-transform duration-300 ease-out group-hover:translate-y-0" />
+                  <Download className="h-4 w-4 relative z-10 transition-transform group-hover:-translate-y-0.5" />
+                  <span className="relative z-10">Download Resume</span>
                 </a>
                 <a
                   href="#marketing-projects"

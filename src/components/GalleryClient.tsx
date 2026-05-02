@@ -68,7 +68,11 @@ export default function GalleryClient({ images }: GalleryClientProps) {
 
   return (
     <div className="relative z-20 min-h-screen bg-[#0a0a0a] px-6 py-32">
-      <div className="pointer-events-none absolute right-1/4 top-1/4 h-[400px] w-[400px] rounded-full bg-blue-500/10 blur-[150px]" />
+      <motion.div
+        animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.9, 0.5] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+        className="pointer-events-none absolute right-1/4 top-1/4 h-[400px] w-[400px] rounded-full bg-blue-500/10 blur-[150px]" 
+      />
 
       <div className="relative z-10 mx-auto max-w-7xl text-white">
         <motion.div

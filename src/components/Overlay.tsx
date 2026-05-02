@@ -29,12 +29,20 @@ export default function Overlay() {
                 {/* Section 1 */}
                 <motion.div
                     style={{ opacity: opacity1, y: y1 }}
-                    className="absolute inset-0 flex items-center justify-center text-center"
+                    className="absolute inset-0 flex flex-col items-center justify-center text-center"
                 >
                     <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-4 drop-shadow-lg">
                         Hannan Rasool.<br />
                         <span className="text-gray-300">Digital Marketer & Designer.</span>
                     </h1>
+                    <motion.div
+                        animate={{ y: [0, 10, 0] }}
+                        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                        className="absolute bottom-12 text-white/50 flex flex-col items-center gap-2"
+                    >
+                        <span className="text-xs uppercase tracking-widest">Scroll to explore</span>
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+                    </motion.div>
                 </motion.div>
 
                 {/* Section 2 */}
