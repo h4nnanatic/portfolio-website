@@ -322,6 +322,13 @@ export default function Resume() {
                   </div>
                   <span className="text-gray-300 transition-colors group-hover:text-white">03391500217</span>
                 </a>
+
+                <a href="https://wa.me/923391500217" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition-colors group-hover:bg-emerald-500/20 group-hover:text-emerald-400">
+                    <MessageCircle className="h-4 w-4" />
+                  </div>
+                  <span className="text-gray-300 transition-colors group-hover:text-white">WhatsApp</span>
+                </a>
               </div>
             </div>
           </div>
@@ -616,16 +623,6 @@ export default function Resume() {
           </div>
         </motion.section>
       </div>
-
-      <a
-        href="https://wa.me/923391500217"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-8 right-8 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 transition-all duration-300 hover:scale-110 hover:bg-emerald-400"
-        aria-label="Chat on WhatsApp"
-      >
-        <MessageCircle className="h-7 w-7" />
-      </a>
     </div>
   );
 }
