@@ -129,6 +129,9 @@ export default function Resume() {
       ],
       icon: <MonitorPlay className="h-5 w-5 text-purple-400" />,
     },
+  ];
+
+  const courses: ExperienceItem[] = [
     {
       role: "Video Editor",
       company: "Saylani Mass IT Training",
@@ -361,6 +364,57 @@ export default function Resume() {
                     {exp.desc.length > 0 ? (
                       <ul className="space-y-3 pl-16">
                         {exp.desc.map((item) => (
+                          <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-gray-400 md:text-base">
+                            <div className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-600" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </motion.div>
+                ))}
+              </div>
+            </section>
+
+            <section id="courses" className="pt-8">
+              <div className="mb-10 flex items-center gap-4">
+                <GraduationCap className="h-8 w-8 text-indigo-400" />
+                <h3 className="text-3xl font-bold tracking-tight">Courses & Training</h3>
+              </div>
+
+              <div className="space-y-6">
+                {courses.map((course, i) => (
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5, delay: i * 0.08 }}
+                    key={course.role + course.company}
+                    className="group relative rounded-3xl border border-white/5 bg-[#111] p-6 transition-all hover:border-white/10 hover:bg-white/[0.02] md:p-8"
+                  >
+                    <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-start">
+                      <div className="flex items-center gap-4">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-inner">
+                          {course.icon}
+                        </div>
+                        <div>
+                          <h4 className="text-xl font-semibold text-white transition-colors group-hover:text-indigo-400">
+                            {course.role}
+                          </h4>
+                          <h5 className="font-medium text-gray-400">{course.company}</h5>
+                        </div>
+                      </div>
+
+                      <div className="text-left md:text-right">
+                        <div className="mb-2 inline-block rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-gray-300">
+                          {course.date}
+                        </div>
+                      </div>
+                    </div>
+
+                    {course.desc.length > 0 ? (
+                      <ul className="space-y-3 pl-16">
+                        {course.desc.map((item) => (
                           <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-gray-400 md:text-base">
                             <div className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-600" />
                             {item}
