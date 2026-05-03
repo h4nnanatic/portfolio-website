@@ -15,9 +15,9 @@ export const metadata: Metadata = {
     description: "A high-end scrollytelling personal portfolio",
     images: [
       {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
+        url: "/og-image.jpg",
+        width: 1024,
+        height: 1024,
         alt: "Hannan Rasool",
       },
     ],
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Hannan Rasool Portfolio",
     description: "A high-end scrollytelling personal portfolio",
-    images: ["/og-image.png"],
+    images: ["/og-image.jpg"],
   },
 };
 
