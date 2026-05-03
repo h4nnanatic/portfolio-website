@@ -50,12 +50,15 @@ export default function ReviewPopup({ trigger }: { trigger: boolean }) {
 
   // Trigger popup when in view
   useEffect(() => {
-    if (trigger && !hasClosed && !isOpen) {
+    let timer: NodeJS.Timeout;
+    if (trigger && !hasClosed) {
       // Add a small delay so it doesn't pop up instantly
-      const timer = setTimeout(() => setIsOpen(true), 1000);
-      return () => clearTimeout(timer);
+      timer = setTimeout(() => setIsOpen(true), 1000);
+    } else {
+      setIsOpen(false);
     }
-  }, [trigger, hasClosed, isOpen]);
+    return () => clearTimeout(timer);
+  }, [trigger, hasClosed]);
 
   // Auto-cycle reviews
   useEffect(() => {
@@ -72,7 +75,7 @@ export default function ReviewPopup({ trigger }: { trigger: boolean }) {
   };
 
   return (
-    <div className="pointer-events-none fixed bottom-6 right-6 z-50 flex flex-col items-end justify-end md:bottom-10 md:right-10">
+    <div className="pointer-events-none fixed bottom-8 right-8 z-[999] flex flex-col items-end justify-end">
       <AnimatePresence>
         {isOpen && (
           <motion.div
