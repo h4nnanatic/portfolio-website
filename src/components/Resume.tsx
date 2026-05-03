@@ -22,6 +22,9 @@ import {
   Phone,
   Sparkles,
   Target,
+  Film,
+  Image as ImageIcon,
+  Scissors,
 } from "lucide-react";
 import StatsBox from "./StatsBox";
 
@@ -234,6 +237,15 @@ export default function Resume() {
     },
   ];
 
+  const coreStack = [
+    { name: "Premiere Pro", icon: <Film className="h-10 w-10 text-[#9999ff]" />, border: "border-b-[#9999ff]" },
+    { name: "After Effects", icon: <Layers3 className="h-10 w-10 text-[#9999ff]" />, border: "border-b-[#9999ff]" },
+    { name: "Photoshop", icon: <ImageIcon className="h-10 w-10 text-[#31a8ff]" />, border: "border-b-[#31a8ff]" },
+    { name: "Illustrator", icon: <PenTool className="h-10 w-10 text-[#ff9a00]" />, border: "border-b-[#ff9a00]" },
+    { name: "Canva", icon: <Brush className="h-10 w-10 text-[#00c4cc]" />, border: "border-b-[#00c4cc]" },
+    { name: "CapCut", icon: <Scissors className="h-10 w-10 text-white" />, border: "border-b-white" },
+  ];
+
   return (
     <div id="about" className="relative z-20 min-h-screen overflow-hidden bg-[#0a0a0a] px-6 py-28 md:py-32">
       <motion.div
@@ -276,7 +288,7 @@ export default function Resume() {
             </a>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start">
             <div className="space-y-8 lg:col-span-7">
               <p className="max-w-2xl text-xl font-light leading-relaxed text-gray-400 md:text-2xl">
                 I build growth-focused campaigns as a <strong className="font-medium text-white">Digital Marketer, Graphic Designer, and Video Editor</strong>, combining creative storytelling with data-minded execution.
@@ -322,6 +334,34 @@ export default function Resume() {
                   </div>
                   <span className="text-gray-300 transition-colors group-hover:text-white">03391500217</span>
                 </a>
+              </div>
+
+              {/* Core Stack / My Skills */}
+              <div className="mt-4 rounded-3xl p-6 md:p-8 bg-transparent">
+                <div className="mb-8 text-center md:text-left">
+                  <h3 className="text-3xl font-bold tracking-tight text-emerald-400 mb-3">My Skills</h3>
+                  <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+                    I turn your ideas into beautiful and functional projects with these skills.
+                  </p>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  {coreStack.map((skill) => (
+                    <motion.div
+                      key={skill.name}
+                      whileHover={{ scale: 1.02 }}
+                      className={`relative flex flex-col items-center justify-center rounded-2xl bg-[#111] p-6 border border-white/5 shadow-lg border-b-2 ${skill.border} transition-colors hover:bg-white/[0.03]`}
+                    >
+                      <div className="absolute right-3 top-3 h-2 w-2 rounded-full bg-emerald-500/80 shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+                      <div className="mb-4">
+                        {skill.icon}
+                      </div>
+                      <span className="text-sm font-semibold tracking-wide text-gray-300">
+                        {skill.name}
+                      </span>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
