@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Minus, MessageSquareQuote } from "lucide-react";
 
 const reviews = [
@@ -48,6 +49,12 @@ export default function ReviewPopup({ trigger }: { trigger: boolean }) {
   const [hasClosed, setHasClosed] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Trigger popup when in view
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -74,8 +81,10 @@ export default function ReviewPopup({ trigger }: { trigger: boolean }) {
     setHasClosed(true);
   };
 
-  return (
-    <div className="pointer-events-none fixed bottom-8 right-8 z-[999] flex flex-col items-end justify-end">
+  if (!mounted) return null;
+
+  return createPortal(
+    <div className="pointer-events-none fixed bottom-8 right-8 z-[99999] flex flex-col items-end justify-end">
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -156,6 +165,7 @@ export default function ReviewPopup({ trigger }: { trigger: boolean }) {
           </motion.button>
         )}
       </AnimatePresence>
-    </div>
+    </div>,
+    document.body
   );
 }
