@@ -24,6 +24,9 @@ import {
   Target,
 } from "lucide-react";
 import StatsBox from "./StatsBox";
+import ReviewPopup from "./ReviewPopup";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
 
 interface ExperienceItem {
   role: string;
@@ -234,8 +237,12 @@ export default function Resume() {
     },
   ];
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { amount: 0.1, once: false });
+
   return (
-    <div id="about" className="relative z-20 min-h-screen overflow-hidden bg-[#0a0a0a] px-6 py-28 md:py-32">
+    <div ref={containerRef} id="about" className="relative z-20 min-h-screen overflow-hidden bg-[#0a0a0a] px-6 py-28 md:py-32">
+      <ReviewPopup trigger={isInView} />
       <motion.div
         animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
