@@ -23,6 +23,7 @@ import {
   Sparkles,
   Target,
 } from "lucide-react";
+import StatsBox from "./StatsBox";
 
 interface ExperienceItem {
   role: string;
@@ -300,24 +301,28 @@ export default function Resume() {
                   View Marketing Projects
                 </a>
               </div>
+              
+              <div className="pt-4">
+                <StatsBox />
+              </div>
             </div>
 
-            <div className="flex flex-col justify-center gap-6 rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-xl lg:col-span-5 h-full">
-              <a href="mailto:hannanrasool3@gmail.com" className="group flex items-center gap-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition-colors group-hover:bg-emerald-500/20 group-hover:text-emerald-400">
-                  <Mail className="h-4 w-4" />
-                </div>
-                <span className="text-gray-300 transition-colors group-hover:text-white">hannanrasool3@gmail.com</span>
-              </a>
+            <div className="flex flex-col gap-6 lg:col-span-5">
+              <div className="flex flex-col justify-center gap-6 rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-xl">
+                <a href="mailto:hannanrasool3@gmail.com" className="group flex items-center gap-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition-colors group-hover:bg-emerald-500/20 group-hover:text-emerald-400">
+                    <Mail className="h-4 w-4" />
+                  </div>
+                  <span className="text-gray-300 transition-colors group-hover:text-white">hannanrasool3@gmail.com</span>
+                </a>
 
-              <a href="tel:03391500217" className="group flex items-center gap-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition-colors group-hover:bg-blue-500/20 group-hover:text-blue-400">
-                  <Phone className="h-4 w-4" />
-                </div>
-                <span className="text-gray-300 transition-colors group-hover:text-white">03391500217</span>
-              </a>
-
-
+                <a href="tel:03391500217" className="group flex items-center gap-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition-colors group-hover:bg-blue-500/20 group-hover:text-blue-400">
+                    <Phone className="h-4 w-4" />
+                  </div>
+                  <span className="text-gray-300 transition-colors group-hover:text-white">03391500217</span>
+                </a>
+              </div>
             </div>
           </div>
         </motion.div>
