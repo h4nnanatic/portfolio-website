@@ -31,9 +31,14 @@ export default function Overlay() {
                     style={{ opacity: opacity1, y: y1 }}
                     className="absolute inset-0 flex flex-col items-center justify-center text-center"
                 >
-                    <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-4 drop-shadow-lg">
-                        Hannan Rasool.<br />
-                        <span className="text-gray-300">Digital Marketer & Designer.</span>
+                    <h1 className="mb-4 text-6xl font-black tracking-tighter drop-shadow-2xl md:text-8xl">
+                        <span className="text-[#10b981]">
+                            Hannan Rasool.
+                        </span>
+                        <br />
+                        <span className="text-4xl font-bold tracking-tight text-white md:text-6xl">
+                            Digital Marketer & Designer.
+                        </span>
                     </h1>
                     <motion.div
                         animate={{ y: [0, 10, 0] }}
@@ -50,8 +55,10 @@ export default function Overlay() {
                     style={{ opacity: opacity2, y: y2 }}
                     className="absolute inset-x-0 inset-y-0 flex items-center justify-start text-left px-8 md:px-24"
                 >
-                    <h2 className="text-4xl md:text-6xl font-medium tracking-tight text-white w-full max-w-4xl drop-shadow-lg">
-                        Video Editor, Graphic Designer, and Digital Marketer.
+                    <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-white w-full max-w-4xl drop-shadow-2xl leading-tight">
+                        <span className="text-[#10b981]">Video Editor</span>,<br />
+                        Graphic Designer, and<br />
+                        <span className="text-[#10b981]">Digital Marketer</span>.
                     </h2>
                 </motion.div>
 
@@ -60,8 +67,11 @@ export default function Overlay() {
                     style={{ opacity: opacity3, y: y3 }}
                     className="absolute inset-x-0 inset-y-0 flex items-center justify-end text-right px-8 md:px-24"
                 >
-                    <h2 className="text-4xl md:text-6xl font-medium tracking-tight text-white w-full max-w-4xl drop-shadow-lg">
-                        Turning ideas into clear and attractive visuals.
+                    <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-white w-full max-w-4xl drop-shadow-2xl leading-tight">
+                        Turning ideas into <br />
+                        <span className="text-[#10b981] font-black">
+                            clear and attractive visuals.
+                        </span>
                     </h2>
                 </motion.div>
 
