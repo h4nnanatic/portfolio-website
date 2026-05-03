@@ -10,6 +10,24 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Hannan Rasool Portfolio",
   description: "A high-end scrollytelling personal portfolio",
+  openGraph: {
+    title: "Hannan Rasool Portfolio",
+    description: "A high-end scrollytelling personal portfolio",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Hannan Rasool",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hannan Rasool Portfolio",
+    description: "A high-end scrollytelling personal portfolio",
+    images: ["/og-image.png"],
+  },
 };
 
 import CustomCursor from "@/components/CustomCursor";
