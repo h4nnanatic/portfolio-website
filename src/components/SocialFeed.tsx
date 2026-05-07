@@ -2,23 +2,39 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Instagram, Linkedin, ExternalLink, MessageSquare, Heart, Loader2 } from "lucide-react";
-import Image from "next/image";
+import { Instagram, ExternalLink, Loader2 } from "lucide-react";
 
-// Behold API response type
+// Behold API response types
+interface BeholdPostSize {
+  mediaUrl: string;
+  height: number;
+  width: number;
+}
+
 interface BeholdPost {
   id: string;
-  media_url: string;
+  mediaUrl: string;
   permalink: string;
   caption: string;
+  prunedCaption: string;
   timestamp: string;
-  media_type: string;
+  mediaType: string;
+  sizes: {
+    small: BeholdPostSize;
+    medium: BeholdPostSize;
+    large: BeholdPostSize;
+    full: BeholdPostSize;
+  };
+}
+
+interface BeholdFeed {
+  username: string;
+  posts: BeholdPost[];
 }
 
 interface SocialPost {
   id: string;
-  platform: "instagram" | "linkedin";
-  image?: string;
+  image: string;
   content: string;
   link: string;
   date: string;
@@ -30,40 +46,23 @@ export default function SocialFeed() {
   const [error, setError] = useState(false);
 
   // Live Behold Feed URL
-  const BEHOLD_FEED_URL = "https://feeds.behold.so/CvRjoLNFt4hQS1VJbvdc"; 
+  const BEHOLD_FEED_URL = "https://feeds.behold.so/CvRjoLNFt4hQS1VJbvdc";
 
   useEffect(() => {
     async function fetchPosts() {
       try {
         setLoading(true);
-        // We only fetch if the URL is updated from placeholder
-        if (BEHOLD_FEED_URL.includes("YOUR_FEED_ID")) {
-          // Using mock data until user provides real URL
-          setPosts([
-            {
-              id: "m1",
-              platform: "instagram",
-              content: "Pehla post placeholder hai. Jab aap Behold URL dalenge toh real posts yahan aa jayengi!",
-              link: "https://instagram.com",
-              date: "Just now"
-            }
-          ]);
-          setLoading(false);
-          return;
-        }
 
         const response = await fetch(BEHOLD_FEED_URL);
         if (!response.ok) throw new Error("Failed to fetch");
-        const data: BeholdPost[] = await response.json();
-        
-        // Increased limit to 18 to show more previous posts
-        const formattedPosts: SocialPost[] = data.slice(0, 18).map(p => ({
+        const data: BeholdFeed = await response.json();
+
+        const formattedPosts: SocialPost[] = data.posts.slice(0, 18).map(p => ({
           id: p.id,
-          platform: "instagram",
-          image: p.media_url,
-          content: p.caption || "View on Instagram",
+          image: p.sizes?.medium?.mediaUrl || p.mediaUrl,
+          content: p.prunedCaption || p.caption || "",
           link: p.permalink,
-          date: new Date(p.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
+          date: new Date(p.timestamp).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
         }));
 
         setPosts(formattedPosts);
@@ -86,21 +85,19 @@ export default function SocialFeed() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6"
+          className="mb-12"
         >
-          <div>
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/5 px-4 py-1.5 backdrop-blur-md">
-              <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-sm font-semibold uppercase tracking-wide text-transparent">
-                Live Feed
-              </span>
-            </div>
-            <h2 className="text-4xl font-bold tracking-tight text-white md:text-5xl">
-              Social Highlights
-            </h2>
-            <p className="mt-4 max-w-2xl text-gray-400">
-              Mera Instagram feed jo ab automated hai. Jo bhi main post krunga woh yahan show hoga.
-            </p>
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/5 px-4 py-1.5 backdrop-blur-md">
+            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-sm font-semibold uppercase tracking-wide text-transparent">
+              Live Feed
+            </span>
           </div>
+          <h2 className="text-4xl font-bold tracking-tight text-white md:text-5xl">
+            Instagram Highlights
+          </h2>
+          <p className="mt-4 max-w-2xl text-gray-400">
+            Latest posts from my Instagram, updated automatically.
+          </p>
         </motion.div>
 
         {loading ? (
@@ -109,7 +106,7 @@ export default function SocialFeed() {
           </div>
         ) : error ? (
           <div className="text-center py-20 border border-dashed border-emerald-500/10 rounded-3xl">
-            <p className="text-gray-500 italic">Feed load nahi ho saka. Behold URL check krein.</p>
+            <p className="text-gray-500 italic">Could not load the feed. Please try again later.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -134,17 +131,18 @@ export default function SocialFeed() {
 
                 <div className="relative aspect-square w-full overflow-hidden bg-neutral-900">
                   {post.image ? (
-                    <img 
-                      src={post.image} 
-                      alt="Social post" 
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                    <img
+                      src={post.image}
+                      alt="Instagram post"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      loading="lazy"
                     />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-neutral-800 to-neutral-900">
                       <span className="text-4xl opacity-20">📸</span>
                     </div>
                   )}
-                  
+
                   <div className="absolute inset-0 bg-black/40 opacity-0 transition-opacity group-hover:opacity-100 flex items-center justify-center">
                     <ExternalLink className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-all scale-75 group-hover:scale-100" />
                   </div>
@@ -163,7 +161,6 @@ export default function SocialFeed() {
             ))}
           </div>
         )}
-
       </div>
     </section>
   );
