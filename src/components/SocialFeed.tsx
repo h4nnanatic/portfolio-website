@@ -101,25 +101,6 @@ export default function SocialFeed() {
               Mera Instagram feed jo ab automated hai. Jo bhi main post krunga woh yahan show hoga.
             </p>
           </div>
-
-          <div className="flex gap-4">
-            <a
-              href="https://instagram.com/hannan_rasool" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-400 transition-all hover:border-emerald-500/50 hover:bg-emerald-500/10 hover:text-emerald-400"
-            >
-              <Instagram className="h-5 w-5" />
-            </a>
-            <a
-              href="https://linkedin.com/in/hannanrasool"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-400 transition-all hover:border-emerald-500/50 hover:bg-emerald-500/10 hover:text-emerald-400"
-            >
-              <Linkedin className="h-5 w-5" />
-            </a>
-          </div>
         </motion.div>
 
         {loading ? (
@@ -183,31 +164,6 @@ export default function SocialFeed() {
           </div>
         )}
 
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          className="mt-16 text-center"
-        >
-          <p className="text-gray-500 text-sm mb-6">Social media pr mazeed updates ke liye:</p>
-          <div className="flex flex-wrap justify-center gap-4">
-             <a
-              href="https://instagram.com/hannan_rasool"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/20 bg-emerald-500/5 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-emerald-500/10 hover:border-emerald-500/30"
-            >
-              Follow on Instagram
-            </a>
-            <a
-              href="https://linkedin.com/in/hannanrasool"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/20 bg-emerald-500/5 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-emerald-500/10 hover:border-emerald-500/30"
-            >
-              Connect on LinkedIn
-            </a>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

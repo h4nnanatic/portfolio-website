@@ -26,8 +26,8 @@ export default function Home() {
       </div>
 
       <Resume />
-      <UiUxProjects />
       <SocialFeed />
+      <UiUxProjects />
       <Gallery />
       <Footer />
       
