@@ -88,8 +88,8 @@ export default function SocialFeed() {
           className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6"
         >
           <div>
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md">
-              <span className="bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-sm font-semibold uppercase tracking-wide text-transparent">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/5 px-4 py-1.5 backdrop-blur-md">
+              <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-sm font-semibold uppercase tracking-wide text-transparent">
                 Live Feed
               </span>
             </div>
@@ -106,7 +106,7 @@ export default function SocialFeed() {
               href="https://instagram.com/hannan_rasool" 
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-400 transition-all hover:border-pink-500/50 hover:bg-pink-500/10 hover:text-pink-400"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-400 transition-all hover:border-emerald-500/50 hover:bg-emerald-500/10 hover:text-emerald-400"
             >
               <Instagram className="h-5 w-5" />
             </a>
@@ -114,7 +114,7 @@ export default function SocialFeed() {
               href="https://linkedin.com/in/hannanrasool"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-400 transition-all hover:border-blue-500/50 hover:bg-blue-500/10 hover:text-blue-400"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-400 transition-all hover:border-emerald-500/50 hover:bg-emerald-500/10 hover:text-emerald-400"
             >
               <Linkedin className="h-5 w-5" />
             </a>
@@ -126,7 +126,7 @@ export default function SocialFeed() {
             <Loader2 className="h-8 w-8 animate-spin text-emerald-400" />
           </div>
         ) : error ? (
-          <div className="text-center py-20 border border-dashed border-white/10 rounded-3xl">
+          <div className="text-center py-20 border border-dashed border-emerald-500/10 rounded-3xl">
             <p className="text-gray-500 italic">Feed load nahi ho saka. Behold URL check krein.</p>
           </div>
         ) : (
@@ -141,11 +141,11 @@ export default function SocialFeed() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-[#111] transition-all hover:border-white/20 hover:bg-white/[0.02]"
+                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-[#111] transition-all hover:border-emerald-500/20 hover:bg-white/[0.02]"
               >
                 <div className="absolute left-4 top-4 z-10 rounded-full bg-black/50 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-md border border-white/10">
                   <div className="flex items-center gap-1.5">
-                    <Instagram className="h-3 w-3 text-pink-400" />
+                    <Instagram className="h-3 w-3 text-emerald-400" />
                     Instagram
                   </div>
                 </div>
@@ -193,7 +193,7 @@ export default function SocialFeed() {
               href="https://instagram.com/hannan_rasool"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-white/10 hover:border-pink-500/30"
+              className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/20 bg-emerald-500/5 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-emerald-500/10 hover:border-emerald-500/30"
             >
               Follow on Instagram
             </a>
@@ -201,7 +201,7 @@ export default function SocialFeed() {
               href="https://linkedin.com/in/hannanrasool"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-white/10 hover:border-blue-500/30"
+              className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/20 bg-emerald-500/5 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-emerald-500/10 hover:border-emerald-500/30"
             >
               Connect on LinkedIn
             </a>
