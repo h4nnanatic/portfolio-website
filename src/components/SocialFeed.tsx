@@ -29,8 +29,8 @@ export default function SocialFeed() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  // REPLACE THIS WITH YOUR BEHOLD FEED URL
-  const BEHOLD_FEED_URL = "https://feeds.behold.so/YOUR_FEED_ID"; 
+  // Live Behold Feed URL
+  const BEHOLD_FEED_URL = "https://feeds.behold.so/CvRjoLNFt4hQS1VJbvdc"; 
 
   useEffect(() => {
     async function fetchPosts() {
