@@ -56,7 +56,8 @@ export default function SocialFeed() {
         if (!response.ok) throw new Error("Failed to fetch");
         const data: BeholdPost[] = await response.json();
         
-        const formattedPosts: SocialPost[] = data.slice(0, 6).map(p => ({
+        // Increased limit to 18 to show more previous posts
+        const formattedPosts: SocialPost[] = data.slice(0, 18).map(p => ({
           id: p.id,
           platform: "instagram",
           image: p.media_url,
