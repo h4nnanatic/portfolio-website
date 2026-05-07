@@ -4,6 +4,7 @@ import Resume from "@/components/Resume";
 import Gallery from "@/components/Gallery";
 import UiUxProjects from "@/components/UiUxProjects";
 import Footer from "@/components/Footer";
+import SocialFeed from "@/components/SocialFeed";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       </div>
       <Resume />
       <UiUxProjects />
+      <SocialFeed />
       <Gallery />
       <Footer />
     </main>
