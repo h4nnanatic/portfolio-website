@@ -1,3 +1,5 @@
+"use client";
+
 import ScrollyCanvas from "@/components/ScrollyCanvas";
 import Overlay from "@/components/Overlay";
 import Resume from "@/components/Resume";
