@@ -44,10 +44,11 @@ const reviews = [
   },
 ];
 
-export default function ReviewPopup({ trigger }: { trigger: boolean }) {
+export default function ReviewPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [hasClosed, setHasClosed] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [inAbout, setInAbout] = useState(false);
 
   const [mounted, setMounted] = useState(false);
 
@@ -55,17 +56,34 @@ export default function ReviewPopup({ trigger }: { trigger: boolean }) {
     setMounted(true);
   }, []);
 
-  // Trigger popup when in view
+  // Watch for when user scrolls to the Resume/About section
+  useEffect(() => {
+    if (!mounted) return;
+
+    const resumeSection = document.querySelector<HTMLElement>("#about-section");
+    if (!resumeSection) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInAbout(entry.isIntersecting);
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(resumeSection);
+    return () => observer.disconnect();
+  }, [mounted]);
+
+  // Trigger popup when About section is in view
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (trigger && !hasClosed) {
-      // Add a small delay so it doesn't pop up instantly
+    if (inAbout && !hasClosed) {
       timer = setTimeout(() => setIsOpen(true), 1000);
     } else {
       setIsOpen(false);
     }
     return () => clearTimeout(timer);
-  }, [trigger, hasClosed]);
+  }, [inAbout, hasClosed]);
 
   // Auto-cycle reviews
   useEffect(() => {

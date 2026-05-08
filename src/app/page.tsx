@@ -6,7 +6,6 @@ import UiUxProjects from "@/components/UiUxProjects";
 import Footer from "@/components/Footer";
 import SocialFeed from "@/components/SocialFeed";
 import StatsBox from "@/components/StatsBox";
-import ReviewPopup from "@/components/ReviewPopup";
 
 export default function Home() {
   return (
@@ -25,8 +24,6 @@ export default function Home() {
       <UiUxProjects />
       <Gallery />
       <Footer />
-      
-      <ReviewPopup trigger={true} />
     </main>
   );
 }
