@@ -5,7 +5,6 @@ import Gallery from "@/components/Gallery";
 import UiUxProjects from "@/components/UiUxProjects";
 import Footer from "@/components/Footer";
 import SocialFeed from "@/components/SocialFeed";
-import StatsBox from "@/components/StatsBox";
 
 export default function Home() {
   return (
@@ -13,10 +12,6 @@ export default function Home() {
       <div className="relative">
         <ScrollyCanvas />
         <Overlay />
-      </div>
-      
-      <div className="relative z-30 -mt-20 px-6 max-w-7xl mx-auto">
-         <StatsBox />
       </div>
 
       <Resume />
