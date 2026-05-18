@@ -1,25 +1,61 @@
-import React from 'react';
+"use client";
+
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 export default function BackgroundGlow() {
+  const [mousePosition, setMousePosition] = useState({ x: -1000, y: -1000 });
+  const [isHovering, setIsHovering] = useState(false);
+
+  useEffect(() => {
+    const updateMousePosition = (e: MouseEvent) => {
+      setMousePosition({
+        x: e.clientX,
+        y: e.clientY,
+      });
+      if (!isHovering) setIsHovering(true);
+    };
+
+    const handleMouseLeave = () => setIsHovering(false);
+
+    window.addEventListener("mousemove", updateMousePosition);
+    document.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      window.removeEventListener("mousemove", updateMousePosition);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, [isHovering]);
+
   return (
-    <div className="absolute inset-0 pointer-events-none z-30 overflow-hidden mix-blend-screen">
-      {/* Top Left Blob */}
-      <div 
-        className="absolute top-0 left-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full blur-[100px] opacity-60 animate-blob"
-        style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.5) 0%, rgba(16,185,129,0) 70%)' }}
-      ></div>
+    <div className="pointer-events-none fixed inset-0 z-30 overflow-hidden mix-blend-screen">
+      {/* Primary Emerald Glow */}
+      <motion.div
+        className="absolute left-0 top-0 h-[600px] w-[600px] rounded-full blur-[120px]"
+        style={{ 
+          background: 'radial-gradient(circle, rgba(16,185,129,0.5) 0%, rgba(16,185,129,0) 70%)',
+        }}
+        animate={{
+          x: mousePosition.x - 300,
+          y: mousePosition.y - 300,
+          opacity: isHovering ? 1 : 0
+        }}
+        transition={{ type: "tween", ease: "backOut", duration: 0.5 }}
+      />
       
-      {/* Middle Right Blob */}
-      <div 
-        className="absolute top-[30%] right-[-5%] w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] rounded-full blur-[120px] opacity-50 animate-blob animation-delay-2000"
-        style={{ background: 'radial-gradient(circle, rgba(4,120,87,0.4) 0%, rgba(4,120,87,0) 70%)' }}
-      ></div>
-      
-      {/* Bottom Left Blob */}
-      <div 
-        className="absolute bottom-[-10%] left-[10%] w-[45vw] h-[45vw] max-w-[650px] max-h-[650px] rounded-full blur-[90px] opacity-50 animate-blob animation-delay-4000"
-        style={{ background: 'radial-gradient(circle, rgba(52,211,153,0.4) 0%, rgba(52,211,153,0) 70%)' }}
-      ></div>
+      {/* Secondary Teal Glow that trails slightly */}
+      <motion.div
+        className="absolute left-0 top-0 h-[900px] w-[900px] rounded-full blur-[150px]"
+        style={{ 
+          background: 'radial-gradient(circle, rgba(4,120,87,0.3) 0%, rgba(4,120,87,0) 70%)',
+        }}
+        animate={{
+          x: mousePosition.x - 450,
+          y: mousePosition.y - 450,
+          opacity: isHovering ? 1 : 0
+        }}
+        transition={{ type: "tween", ease: "circOut", duration: 1.5 }}
+      />
     </div>
   );
 }
