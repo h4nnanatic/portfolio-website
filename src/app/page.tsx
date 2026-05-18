@@ -5,19 +5,25 @@ import Gallery from "@/components/Gallery";
 import UiUxProjects from "@/components/UiUxProjects";
 import Footer from "@/components/Footer";
 import SocialFeed from "@/components/SocialFeed";
+import BackgroundGlow from "@/components/BackgroundGlow";
 
 export default function Home() {
   return (
     <main className="relative min-h-screen bg-[#121212] selection:bg-white/20">
-      <div className="relative">
+      <div className="relative z-10">
         <ScrollyCanvas />
         <Overlay />
       </div>
 
-      <Resume />
-      <SocialFeed />
-      <UiUxProjects />
-      <Gallery />
+      <div className="relative">
+        <BackgroundGlow />
+        <div className="relative z-10">
+          <Resume />
+          <SocialFeed />
+          <UiUxProjects />
+          <Gallery />
+        </div>
+      </div>
       <Footer />
     </main>
   );
