@@ -45,14 +45,14 @@ body {
 
 @keyframes shooting-star {
   0% {
-    transform: rotate(225deg) translateX(0);
+    transform: rotate(145deg) translateX(0);
     opacity: 1;
   }
   70% {
     opacity: 1;
   }
   100% {
-    transform: rotate(225deg) translateX(2500px);
+    transform: rotate(145deg) translateX(3000px);
     opacity: 0;
   }
 }

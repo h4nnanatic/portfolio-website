@@ -16,13 +16,13 @@ export default function ShootingStars() {
   useEffect(() => {
     const generateStars = () => {
       const newStars: Star[] = [];
-      const numStars = 25; // Number of shooting stars
+      const numStars = 40; // Number of shooting stars
       for (let i = 0; i < numStars; i++) {
         newStars.push({
           id: i,
-          x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920) * 1.5,
-          y: (Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080)) - 500,
-          delay: Math.random() * 10,
+          x: (Math.random() * 3000) - 500, // Spread widely across the width
+          y: (Math.random() * 2000) - 1000, // Spread from top to bottom
+          delay: Math.random() * 12,
           duration: Math.random() * 2 + 2, 
         });
       }
@@ -49,9 +49,9 @@ export default function ShootingStars() {
           }}
         >
           {/* Tail */}
-          <div className="h-[2px] w-[150px] bg-gradient-to-r from-transparent via-emerald-500/50 to-emerald-400" />
+          <div className="h-[3px] w-[250px] bg-gradient-to-r from-transparent via-emerald-400/80 to-emerald-300" />
           {/* Head */}
-          <div className="absolute right-0 top-1/2 h-[3px] w-[3px] -translate-y-1/2 rounded-full bg-emerald-300 shadow-[0_0_15px_3px_#10b981]" />
+          <div className="absolute right-0 top-1/2 h-[5px] w-[5px] -translate-y-1/2 rounded-full bg-emerald-100 shadow-[0_0_20px_5px_#10b981]" />
         </div>
       ))}
     </div>
