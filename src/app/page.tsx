@@ -5,7 +5,7 @@ import Gallery from "@/components/Gallery";
 import UiUxProjects from "@/components/UiUxProjects";
 import Footer from "@/components/Footer";
 import SocialFeed from "@/components/SocialFeed";
-import BackgroundGlow from "@/components/BackgroundGlow";
+import ShootingStars from "@/components/ShootingStars";
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
       </div>
 
       <div className="relative">
-        <BackgroundGlow />
+        <ShootingStars />
         <div className="relative z-10">
           <Resume />
           <SocialFeed />
