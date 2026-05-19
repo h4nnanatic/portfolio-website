@@ -16,14 +16,14 @@ export default function ShootingStars() {
   useEffect(() => {
     const generateStars = () => {
       const newStars: Star[] = [];
-      const numStars = 40; // Number of shooting stars
+      const numStars = 60; // Increased for a continuous shower
       for (let i = 0; i < numStars; i++) {
         newStars.push({
           id: i,
-          x: (Math.random() * 3000) - 500, // Spread widely across the width
-          y: (Math.random() * 2000) - 1000, // Spread from top to bottom
-          delay: Math.random() * 12,
-          duration: Math.random() * 2 + 2, 
+          x: Math.random() * ((typeof window !== 'undefined' ? window.innerWidth : 1920) + 1000) - 200, 
+          y: Math.random() * ((typeof window !== 'undefined' ? window.innerHeight : 1080) + 500) - 1000,
+          delay: -(Math.random() * 15), // Negative delay so they are already mid-flight on load!
+          duration: Math.random() * 3 + 3, // 3 to 6 seconds duration
         });
       }
       setStars(newStars);
