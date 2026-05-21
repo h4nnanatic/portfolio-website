@@ -22,8 +22,8 @@ export default function ShootingStars() {
           id: i,
           x: Math.random() * ((typeof window !== 'undefined' ? window.innerWidth : 1920) + 1000) - 200, 
           y: Math.random() * ((typeof window !== 'undefined' ? window.innerHeight : 1080) + 500) - 1000,
-          delay: -(Math.random() * 15), // Negative delay so they are already mid-flight on load!
-          duration: Math.random() * 3 + 3, // 3 to 6 seconds duration
+          delay: -(Math.random() * 25), // Negative delay so they are already mid-flight on load!
+          duration: Math.random() * 6 + 6, // 6 to 12 seconds duration (slower speed)
         });
       }
       setStars(newStars);
