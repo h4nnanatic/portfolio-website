@@ -49,9 +49,9 @@ export default function ShootingStars() {
           }}
         >
           {/* Tail */}
-          <div className="h-[3px] w-[250px] bg-gradient-to-r from-transparent via-emerald-400/80 to-emerald-300" />
+          <div className="h-[3px] w-[250px] bg-gradient-to-r from-transparent via-emerald-400/40 to-emerald-400/80" />
           {/* Head */}
-          <div className="absolute right-0 top-1/2 h-[5px] w-[5px] -translate-y-1/2 rounded-full bg-emerald-100 shadow-[0_0_20px_5px_#10b981]" />
+          <div className="absolute right-0 top-1/2 h-[5px] w-[5px] -translate-y-1/2 rounded-full bg-emerald-200 shadow-[0_0_15px_3px_#10b981]" />
         </div>
       ))}
     </div>
