@@ -242,7 +242,7 @@ export default function Resume() {
   const isInView = useInView(containerRef, { amount: 0.1, once: false });
 
   return (
-    <div ref={containerRef} id="about-section" className="relative z-20 min-h-screen overflow-hidden bg-[#0a0a0a] px-6 py-28 md:py-32">
+    <div ref={containerRef} id="about-section" className="relative z-20 min-h-screen overflow-hidden bg-transparent px-6 py-28 md:py-32">
       <ReviewPopup />
       <motion.div
         animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
