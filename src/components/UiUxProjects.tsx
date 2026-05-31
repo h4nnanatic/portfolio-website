@@ -43,7 +43,6 @@ const LUMIN_SCREENS = [
   "Emotion Locker.png",
   "Gamification & Rewards.png",
   "Profile & Wellness Trends.png",
-  "Untitled.png",
 ];
 
 // Interactive Feature Deck for Lumin Mind
@@ -99,7 +98,7 @@ const LUMIN_FEATURES = [
     shortDesc: "Maintaining mental resilience through reward pathways.",
     detailedDesc: "Gamifying standard therapy and mood-tracking habits. Users sustain active mindfulness streaks, achieve beautifully designed milestone badges, earn experience points to customize their profile, and interact in supportive peer-to-peer wellness challenges.",
     mainScreen: "Gamification & Rewards.png",
-    subScreens: ["Untitled.png"],
+    subScreens: [],
     accentClass: "amber",
     glowColor: "rgba(245, 158, 11, 0.4)",
   }
@@ -178,7 +177,7 @@ const LUMIN_CATEGORIES = {
   All: LUMIN_SCREENS,
   Onboarding: ["Login.png", "Register.png", "OTP Verification.png", "Tell Us About Yourself.png"],
   Diagnostics: ["Facial Scan Screen.png", "Voice Input Screen.png", "Survey Screen.png", "Stress Result Screen.png"],
-  "Wellness & Gaming": ["Home Dashboard.png", "Wellness Recommendations.png", "Emotion Locker.png", "Gamification & Rewards.png", "Profile & Wellness Trends.png", "Untitled.png"]
+  "Wellness & Gaming": ["Home Dashboard.png", "Wellness Recommendations.png", "Emotion Locker.png", "Gamification & Rewards.png", "Profile & Wellness Trends.png"]
 };
 
 type CategoryKey = keyof typeof LUMIN_CATEGORIES;
