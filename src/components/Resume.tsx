@@ -23,6 +23,7 @@ import {
   Sparkles,
   Target,
   Instagram,
+  Images,
 } from "lucide-react";
 import StatsBox from "./StatsBox";
 import ReviewPopup from "./ReviewPopup";
@@ -327,7 +328,15 @@ export default function Resume() {
                   href="#marketing-projects"
                   className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition-all hover:border-white/40 hover:bg-white/10"
                 >
+                  <Megaphone className="h-4 w-4 text-emerald-400" />
                   View Marketing Projects
+                </a>
+                <a
+                  href="#gallery"
+                  className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition-all hover:border-white/40 hover:bg-white/10"
+                >
+                  <Images className="h-4 w-4 text-purple-400" />
+                  View Gallery
                 </a>
               </div>
               
