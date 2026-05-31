@@ -100,6 +100,18 @@ const marketingValueCards = [
 export default function Resume() {
   const experiences: ExperienceItem[] = [
     {
+      role: "Media Head",
+      company: "NUML University Faisalabad Campus",
+      date: "03/2026 - Present",
+      location: "Faisalabad, Pakistan",
+      desc: [
+        "Lead and coordinate the media team to manage digital content and campus-wide communications.",
+        "Design visual guidelines, event posters, and promotional materials for university activities.",
+        "Oversee social media coverage and digital engagement campaigns for campus events.",
+      ],
+      icon: <Briefcase className="h-5 w-5 text-indigo-400" />,
+    },
+    {
       role: "Digital Strategist",
       company: "JVO LABS",
       date: "12/2025 - Present",

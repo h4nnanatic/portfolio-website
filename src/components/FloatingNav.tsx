@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 const NAV_ITEMS = [
   { name: "About", href: "#about", icon: User },
   { name: "Experience", href: "#experience", icon: Briefcase },
-  { name: "UI/UX", href: "#uiux", icon: MonitorSmartphone },
   { name: "Gallery", href: "#gallery", icon: ImageIcon },
+  { name: "UI/UX", href: "#uiux", icon: MonitorSmartphone },
 ];
 
 export default function FloatingNav() {

@@ -1,8 +1,9 @@
 import ScrollyCanvas from "@/components/ScrollyCanvas";
 import Overlay from "@/components/Overlay";
 import Resume from "@/components/Resume";
-import Gallery from "@/components/Gallery";
+import CreativeShowcase from "@/components/CreativeShowcase";
 import UiUxProjects from "@/components/UiUxProjects";
+import ArchivedFolder from "@/components/ArchivedFolder";
 import Footer from "@/components/Footer";
 import SocialFeed from "@/components/SocialFeed";
 import ShootingStars from "@/components/ShootingStars";
@@ -20,8 +21,9 @@ export default function Home() {
         <div className="relative z-10">
           <Resume />
           <SocialFeed />
+          <CreativeShowcase />
           <UiUxProjects />
-          <Gallery />
+          <ArchivedFolder />
         </div>
       </div>
       <Footer />

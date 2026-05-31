@@ -2,11 +2,11 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { cache } from "react";
 import { imageSize } from "image-size";
-import GalleryClient from "./GalleryClient";
-import { ACTIVE_POSTERS, ARCHIVED_POSTERS } from "@/lib/constants";
+import ArchivedFolderClient from "./ArchivedFolderClient";
+import { ARCHIVED_POSTERS } from "@/lib/constants";
+import type { GalleryImage } from "./Gallery";
 
 const WORK_DIR = path.join(process.cwd(), "public", "work");
-const THUMB_DIR = path.join(process.cwd(), "public", "thumbnails");
 const FALLBACK_WIDTH = 1200;
 const FALLBACK_HEIGHT = 1600;
 
@@ -31,21 +31,6 @@ const TITLE_OVERRIDES: Record<string, string> = {
 
 const GENERIC_NAME_PATTERNS = [/^untitled/i, /^frame\s+\d+/i, /^gemini_generated_image/i];
 
-type WorkKind = "poster" | "banner" | "branding";
-
-export interface GalleryImage {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-  fileName: string;
-  title: string;
-  kind: WorkKind;
-  featured: boolean;
-  featuredOrder: number;
-  isArchived?: boolean;
-}
-
 function stripExtension(value: string) {
   return value.replace(/\.[^/.]+$/, "");
 }
@@ -55,14 +40,13 @@ function prettifyTitle(fileName: string) {
   if (override) {
     return override;
   }
-
   return stripExtension(fileName)
     .replace(/_/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
 
-function classifyWork(fileName: string, width: number, height: number): WorkKind {
+function classifyWork(fileName: string, width: number, height: number) {
   const baseName = stripExtension(fileName).toLowerCase();
   const ratio = width / height;
 
@@ -70,14 +54,14 @@ function classifyWork(fileName: string, width: number, height: number): WorkKind
     ratio >= 1.6 ||
     /banner|meetup|sports fest|jvolabs|annual dinner|cxo/i.test(baseName)
   ) {
-    return "banner";
+    return "banner" as const;
   }
 
   if (/logo|automation|identity|brand/i.test(baseName)) {
-    return "branding";
+    return "branding" as const;
   }
 
-  return "poster";
+  return "poster" as const;
 }
 
 function numericMeta(fileName: string) {
@@ -128,7 +112,7 @@ function compareForGallery(a: GalleryImage, b: GalleryImage) {
     return featuredDiff;
   }
 
-  const kindOrder: Record<WorkKind, number> = {
+  const kindOrder: Record<string, number> = {
     poster: 0,
     banner: 1,
     branding: 2,
@@ -159,57 +143,45 @@ function compareForGallery(a: GalleryImage, b: GalleryImage) {
   });
 }
 
-const getGalleryImages = cache(async () => {
-  const processList = async (list: string[], isArchived: boolean) => {
-    return Promise.all(
-      list.map(async (fileName, index) => {
-        const filePath = path.join(isArchived ? WORK_DIR : THUMB_DIR, fileName);
-        const encodedName = encodeURIComponent(fileName);
+const getArchivedImages = cache(async () => {
+  const images = await Promise.all(
+    ARCHIVED_POSTERS.map(async (fileName, index) => {
+      const filePath = path.join(WORK_DIR, fileName);
+      const encodedName = encodeURIComponent(fileName);
 
-        let width = FALLBACK_WIDTH;
-        let height = FALLBACK_HEIGHT;
+      let width = FALLBACK_WIDTH;
+      let height = FALLBACK_HEIGHT;
 
-        try {
-          const fileBuffer = await fs.readFile(filePath);
-          const dimensions = imageSize(fileBuffer);
-          width = dimensions.width ?? FALLBACK_WIDTH;
-          height = dimensions.height ?? FALLBACK_HEIGHT;
-        } catch {
-          // fall back to default dimensions if a file can't be read
-        }
+      try {
+        const fileBuffer = await fs.readFile(filePath);
+        const dimensions = imageSize(fileBuffer);
+        width = dimensions.width ?? FALLBACK_WIDTH;
+        height = dimensions.height ?? FALLBACK_HEIGHT;
+      } catch {
+        // fallback
+      }
 
-        // Active thumbnails should all be featured so they appear in the slider
-        const featured = isArchived ? FEATURED_WORKS.indexOf(fileName) >= 0 : true;
-        const featuredOrder = isArchived 
-          ? (FEATURED_WORKS.indexOf(fileName) >= 0 ? FEATURED_WORKS.indexOf(fileName) : Number.MAX_SAFE_INTEGER)
-          : index;
+      const featuredOrder = FEATURED_WORKS.indexOf(fileName);
 
-        return {
-          src: isArchived ? `/work/${encodedName}` : `/thumbnails/${encodedName}`,
-          alt: isArchived ? `Poster artwork ${index + 1}` : `Thumbnail ${index + 1}`,
-          width,
-          height,
-          fileName,
-          title: prettifyTitle(fileName),
-          kind: classifyWork(fileName, width, height),
-          featured,
-          featuredOrder,
-          isArchived,
-        } satisfies GalleryImage;
-      }),
-    );
-  };
+      return {
+        src: `/work/${encodedName}`,
+        alt: `Poster artwork ${index + 1}`,
+        width,
+        height,
+        fileName,
+        title: prettifyTitle(fileName),
+        kind: classifyWork(fileName, width, height),
+        featured: featuredOrder >= 0,
+        featuredOrder: featuredOrder >= 0 ? featuredOrder : Number.MAX_SAFE_INTEGER,
+        isArchived: true,
+      } satisfies GalleryImage;
+    })
+  );
 
-  const archived = await processList(ARCHIVED_POSTERS, true);
-  const active = await processList(ACTIVE_POSTERS, false);
-
-  return {
-    activeImages: active.sort(compareForGallery),
-    archivedImages: archived.sort(compareForGallery),
-  };
+  return images.sort(compareForGallery);
 });
 
-export default async function Gallery() {
-  const { activeImages, archivedImages } = await getGalleryImages();
-  return <GalleryClient activeImages={activeImages} archivedImages={archivedImages} />;
+export default async function ArchivedFolder() {
+  const images = await getArchivedImages();
+  return <ArchivedFolderClient images={images} />;
 }
