@@ -296,7 +296,7 @@ export default function UiUxProjects() {
                     src={`/uiux/jvo-labs/${encodeURIComponent(screen)}`}
                     alt={screen.replace('.png', '')}
                     fill
-                    quality={85}
+                    quality={75}
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-103"
                   />
@@ -388,7 +388,7 @@ export default function UiUxProjects() {
                         alt={activePhoneScreen.replace('.png', '')}
                         fill
                         priority
-                        quality={95}
+                        quality={75}
                         sizes="290px"
                         className="object-cover object-center"
                       />
@@ -592,7 +592,7 @@ export default function UiUxProjects() {
                           src={`/uiux/lumin-mind/${encodeURIComponent(screen)}`}
                           alt={screen}
                           fill
-                          quality={80}
+                          quality={75}
                           sizes="180px"
                           className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                         />
@@ -685,15 +685,15 @@ export default function UiUxProjects() {
               </div>
 
               <div className="relative h-full w-full overflow-hidden rounded-[2.1rem]">
-                <Image
-                  src={`/uiux/lumin-mind/${encodeURIComponent(LUMIN_SCREENS[luminLightboxIndex])}`}
-                  alt={LUMIN_SCREENS[luminLightboxIndex]}
-                  fill
-                  quality={95}
-                  priority
-                  sizes="100vw"
-                  className="object-cover"
-                />
+                  <Image
+                    src={`/uiux/lumin-mind/${encodeURIComponent(LUMIN_SCREENS[luminLightboxIndex])}`}
+                    alt={LUMIN_SCREENS[luminLightboxIndex]}
+                    fill
+                    quality={75}
+                    priority
+                    sizes="100vw"
+                    className="object-cover"
+                  />
               </div>
             </motion.div>
 
@@ -782,15 +782,15 @@ export default function UiUxProjects() {
               </div>
 
               <div className="relative flex-1 w-full bg-black/50 overflow-hidden">
-                <Image
-                  src={`/uiux/jvo-labs/${encodeURIComponent(JVO_SCREENS[jvoLightboxIndex])}`}
-                  alt={JVO_SCREENS[jvoLightboxIndex]}
-                  fill
-                  quality={95}
-                  priority
-                  sizes="100vw"
-                  className="object-contain"
-                />
+                  <Image
+                    src={`/uiux/jvo-labs/${encodeURIComponent(JVO_SCREENS[jvoLightboxIndex])}`}
+                    alt={JVO_SCREENS[jvoLightboxIndex]}
+                    fill
+                    quality={75}
+                    priority
+                    sizes="100vw"
+                    className="object-contain"
+                  />
               </div>
             </motion.div>
 
@@ -807,6 +807,33 @@ export default function UiUxProjects() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Hidden Image Preloader for Instant Transitions */}
+      <div className="hidden absolute opacity-0 w-0 h-0 pointer-events-none" aria-hidden="true">
+        {/* Preload primary screens for all 5 features */}
+        {LUMIN_FEATURES.map((f) => (
+          <Image 
+            key={`preload-main-${f.id}`}
+            src={`/uiux/lumin-mind/${encodeURIComponent(f.mainScreen)}`}
+            alt="preload"
+            width={10}
+            height={10}
+            priority
+          />
+        ))}
+        {/* Preload sub-screens of the active feature */}
+        {activeFeature.subScreens.map((subScreen) => (
+          <Image 
+            key={`preload-sub-${subScreen}`}
+            src={`/uiux/lumin-mind/${encodeURIComponent(subScreen)}`}
+            alt="preload"
+            width={10}
+            height={10}
+            priority
+          />
+        ))}
+      </div>
+
     </section>
   );
 }
