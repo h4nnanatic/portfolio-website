@@ -17,7 +17,7 @@ export const metadata: Metadata = {
       {
         url: "/og-image.jpg",
         width: 1024,
-        height: 1024,
+        height: 682,
         alt: "Hannan Rasool",
       },
     ],
