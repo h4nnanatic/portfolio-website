@@ -104,8 +104,8 @@ async function run() {
       const srcPath = path.join(SEQ_DIR, file);
       const destPath = path.join(SEQ_DIR, `${base}.webp`);
 
-      // Optimize sequence frames to be lightweight (width 800px, quality 65-70)
-      const success = await optimizeImage(srcPath, destPath, { maxWidthOrHeight: 800, quality: 70 });
+      // Optimize sequence frames to be sharp (width 1280px, quality 80)
+      const success = await optimizeImage(srcPath, destPath, { maxWidthOrHeight: 1280, quality: 80 });
       if (success) {
         await fs.unlink(srcPath);
       }
