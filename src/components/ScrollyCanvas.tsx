@@ -23,7 +23,7 @@ export default function ScrollyCanvas() {
 
     const frameSrc = (index: number) => {
         const indexStr = index.toString().padStart(3, "0");
-        return `/sequence/frame_${indexStr}_delay-0.066s.png`;
+        return `/sequence/frame_${indexStr}_delay-0.066s.webp`;
     };
 
     const resolveRenderableFrame = useCallback((index: number) => {

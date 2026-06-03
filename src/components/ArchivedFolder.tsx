@@ -11,22 +11,22 @@ const FALLBACK_WIDTH = 1200;
 const FALLBACK_HEIGHT = 1600;
 
 const FEATURED_WORKS = [
-  "jvolabs.png",
-  "Sports Fest Intramurals Banner in Blue and Neon Green Illustrative Style(1).png",
-  "National University of Modern Languages (Faisalabad Campus) INDOOR SPORTS FEST.png",
-  "CXO MEETUP.jpg",
-  "annual dinner.png",
-  "sports fest.png",
-  "_sarautomation.png",
-  "sarzone automation.png",
-  "httpsportals.numl.edu.pk AdmissionPortalLogin.png",
-  "Beige and Black Minimalist Fashion Store Logo.png"
+  "jvolabs.webp",
+  "Sports Fest Intramurals Banner in Blue and Neon Green Illustrative Style(1).webp",
+  "National University of Modern Languages (Faisalabad Campus) INDOOR SPORTS FEST.webp",
+  "CXO MEETUP.webp",
+  "annual dinner.webp",
+  "sports fest.webp",
+  "_sarautomation.webp",
+  "sarzone automation.webp",
+  "httpsportals.numl.edu.pk AdmissionPortalLogin.webp",
+  "Beige and Black Minimalist Fashion Store Logo.webp"
 ];
 
 const TITLE_OVERRIDES: Record<string, string> = {
-  "httpsportals.numl.edu.pk AdmissionPortalLogin.png": "Admission Portal Campaign Creative",
-  "_sarautomation.png": "SAR Automation Campaign",
-  "sarzone automation.png": "SAR Zone Automation Design",
+  "httpsportals.numl.edu.pk AdmissionPortalLogin.webp": "Admission Portal Campaign Creative",
+  "_sarautomation.webp": "SAR Automation Campaign",
+  "sarzone automation.webp": "SAR Zone Automation Design",
 };
 
 const GENERIC_NAME_PATTERNS = [/^untitled/i, /^frame\s+\d+/i, /^gemini_generated_image/i];
