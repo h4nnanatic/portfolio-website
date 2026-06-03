@@ -94,8 +94,8 @@ async function run() {
     }
   }
 
-  // 3. Convert scroll sequence frames to webp
-  console.log('\nOptimizing scrolling sequence frames in public/sequence...');
+  // 3. Convert scroll sequence frames to webp (upscaling to Full HD 1920x1080)
+  console.log('\nOptimizing scrolling sequence frames in public/sequence (upscaling to Full HD)...');
   const seqFiles = await fs.readdir(SEQ_DIR);
   for (const file of seqFiles) {
     if (file.match(/\.(png|jpg|jpeg)$/i) && !file.endsWith('.webp')) {
@@ -104,10 +104,15 @@ async function run() {
       const srcPath = path.join(SEQ_DIR, file);
       const destPath = path.join(SEQ_DIR, `${base}.webp`);
 
-      // Optimize sequence frames to be sharp (width 1280px, quality 80)
-      const success = await optimizeImage(srcPath, destPath, { maxWidthOrHeight: 1280, quality: 80 });
-      if (success) {
+      try {
+        await sharp(srcPath)
+          .resize(1920, 1080, { fit: 'fill' })
+          .webp({ quality: 80 })
+          .toFile(destPath);
+        
         await fs.unlink(srcPath);
+      } catch (err) {
+        console.error(`Failed to upscale ${file}:`, err);
       }
     }
   }
