@@ -1,4 +1,4 @@
-export const ARCHIVED_POSTERS = [
+const RAW_ARCHIVED_POSTERS = [
     "1 (1).webp",
     "1.webp",
     "10.webp",
@@ -66,13 +66,8 @@ export const ARCHIVED_POSTERS = [
     "ChatGPT Image Jun 3, 2026, 03_35_34 PM.webp",
     "ChatGPT Image Jun 3, 2026, 04_38_18 PM.webp",
     "ChatGPT Image Jun 3, 2026, 04_47_49 PM.webp",
-    "ChatGPT Image Jun 3, 2026, 12_30_23 AM.webp",
-    "Stop Trying To Control Everything.webp",
-    "Sometimes All You Need Is You.webp",
-    "The Boy Billy Butcher.webp",
-    "Original Mindset.webp",
-    "Dont Be Introverted.webp"
-].filter(f => !f.endsWith(".pdf"));
+    "ChatGPT Image Jun 3, 2026, 12_30_23 AM.webp"
+];
 
 export const ACTIVE_POSTERS: string[] = [
     "1.webp",
@@ -117,5 +112,14 @@ export const ACTIVE_POSTERS: string[] = [
     "40.webp",
     "41.webp",
     "42.webp",
-    "43.webp"
+    "43.webp",
+    "Stop Trying To Control Everything.webp",
+    "Sometimes All You Need Is You.webp",
+    "The Boy Billy Butcher.webp",
+    "Original Mindset.webp",
+    "Dont Be Introverted.webp"
 ];
+
+export const ARCHIVED_POSTERS = RAW_ARCHIVED_POSTERS.filter(
+    (f) => !f.endsWith(".pdf") && !ACTIVE_POSTERS.includes(f)
+);

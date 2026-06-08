@@ -200,7 +200,7 @@ async function run() {
 
   for (const item of newPostersJun8) {
     const srcPath = path.join(NEW_POSTERS_DIR, item.original);
-    const destPath = path.join(WORK_DIR, item.renamed);
+    const destPath = path.join(THUMB_DIR, item.renamed);
 
     if (await fileExists(srcPath)) {
       await optimizeImage(srcPath, destPath, { maxWidthOrHeight: 1600, quality: 80 });
