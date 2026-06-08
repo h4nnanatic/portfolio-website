@@ -163,6 +163,52 @@ async function run() {
     }
   }
 
+  // 6. Import & compress the 7 new thumbnails (Jun 8)
+  console.log('\nImporting new thumbnails (Jun 8) from THUMBNAIL/ root directory...');
+  const newThumbsJun8 = [
+    'ChatGPT Image Jun 8, 2026, 07_16_42 PM.png',
+    'ChatGPT Image Jun 8, 2026, 07_16_57 PM.png',
+    'ChatGPT Image Jun 8, 2026, 07_16_59 PM.png',
+    'ChatGPT Image Jun 8, 2026, 07_17_08 PM.png',
+    'ChatGPT Image Jun 8, 2026, 07_17_11 PM.png',
+    'ChatGPT Image Jun 8, 2026, 07_17_17 PM.png',
+    'ChatGPT Image Jun 8, 2026, 07_48_29 PM.png'
+  ];
+
+  for (let i = 0; i < newThumbsJun8.length; i++) {
+    const fileName = newThumbsJun8[i];
+    const srcPath = path.join(NEW_THUMB_DIR, fileName);
+    const index = 37 + i; // next after 36
+    const destPath = path.join(THUMB_DIR, `${index}.webp`);
+
+    if (await fileExists(srcPath)) {
+      await optimizeImage(srcPath, destPath, { maxWidthOrHeight: 1200, quality: 75 });
+    } else {
+      console.warn(`File not found: ${srcPath}`);
+    }
+  }
+
+  // 7. Import & compress the 5 new posters (Jun 8) and rename them
+  console.log('\nImporting new posters (Jun 8) from Posters/ root directory...');
+  const newPostersJun8 = [
+    { original: 'ChatGPT Image Jun 8, 2026, 07_25_11 PM.png', renamed: 'Stop Trying To Control Everything.webp' },
+    { original: 'ChatGPT Image Jun 8, 2026, 07_27_30 PM.png', renamed: 'Sometimes All You Need Is You.webp' },
+    { original: 'ChatGPT Image Jun 8, 2026, 07_37_20 PM.png', renamed: 'The Boy Billy Butcher.webp' },
+    { original: 'ChatGPT Image Jun 8, 2026, 07_39_50 PM.png', renamed: 'Original Mindset.webp' },
+    { original: 'ChatGPT Image Jun 8, 2026, 07_46_11 PM.png', renamed: 'Dont Be Introverted.webp' }
+  ];
+
+  for (const item of newPostersJun8) {
+    const srcPath = path.join(NEW_POSTERS_DIR, item.original);
+    const destPath = path.join(WORK_DIR, item.renamed);
+
+    if (await fileExists(srcPath)) {
+      await optimizeImage(srcPath, destPath, { maxWidthOrHeight: 1600, quality: 80 });
+    } else {
+      console.warn(`File not found: ${srcPath}`);
+    }
+  }
+
   console.log('\n--- Image Optimization Completed Successfully ---');
 }
 

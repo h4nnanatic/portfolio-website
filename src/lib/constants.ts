@@ -66,7 +66,12 @@ export const ARCHIVED_POSTERS = [
     "ChatGPT Image Jun 3, 2026, 03_35_34 PM.webp",
     "ChatGPT Image Jun 3, 2026, 04_38_18 PM.webp",
     "ChatGPT Image Jun 3, 2026, 04_47_49 PM.webp",
-    "ChatGPT Image Jun 3, 2026, 12_30_23 AM.webp"
+    "ChatGPT Image Jun 3, 2026, 12_30_23 AM.webp",
+    "Stop Trying To Control Everything.webp",
+    "Sometimes All You Need Is You.webp",
+    "The Boy Billy Butcher.webp",
+    "Original Mindset.webp",
+    "Dont Be Introverted.webp"
 ].filter(f => !f.endsWith(".pdf"));
 
 export const ACTIVE_POSTERS: string[] = [
@@ -105,5 +110,12 @@ export const ACTIVE_POSTERS: string[] = [
     "33.webp",
     "34.webp",
     "35.webp",
-    "36.webp"
+    "36.webp",
+    "37.webp",
+    "38.webp",
+    "39.webp",
+    "40.webp",
+    "41.webp",
+    "42.webp",
+    "43.webp"
 ];
