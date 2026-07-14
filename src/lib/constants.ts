@@ -70,6 +70,11 @@ const RAW_ARCHIVED_POSTERS = [
 ];
 
 export const ACTIVE_POSTERS: string[] = [
+    "Its You Vs You.webp",
+    "Memories Ouch.webp",
+    "Faisalabad Clock Tower.webp",
+    "Say My Name.webp",
+    "Darta Hai.webp",
     "1.webp",
     "2.webp",
     "3.webp",
