@@ -109,7 +109,7 @@ export default function Resume() {
     {
       role: "Chief Marketing Officer (CMO)",
       company: "Ad Gaari",
-      date: "01/2026 - Present",
+      date: "05/2026 - Present",
       location: "Faisalabad, Pakistan",
       desc: [
         "Lead brand strategy, marketing planning and business growth initiatives.",
