@@ -70,6 +70,18 @@ const RAW_ARCHIVED_POSTERS = [
 ];
 
 export const ACTIVE_POSTERS: string[] = [
+    "Its All About Perspective.webp",
+    "No Human Is Fortress.webp",
+    "O Romeo.webp",
+    "Obsessed Revenge.webp",
+    "Middle Class Pakistani System.webp",
+    "Free Taxi.webp",
+    "Abdel Rahman Mohamed.webp",
+    "The Last Drag.webp",
+    "What I Believe Vs What I Do.webp",
+    "The Matrix Code.webp",
+    "Power To Make It.webp",
+    "The Wolf Of Wall Street.webp",
     "Its You Vs You.webp",
     "Memories Ouch.webp",
     "Faisalabad Clock Tower.webp",
