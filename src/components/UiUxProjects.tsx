@@ -173,15 +173,6 @@ const colorMap: Record<string, {
   }
 };
 
-const LUMIN_CATEGORIES = {
-  All: LUMIN_SCREENS,
-  Onboarding: ["Login.png", "Register.png", "OTP Verification.png", "Tell Us About Yourself.png"],
-  Diagnostics: ["Facial Scan Screen.png", "Voice Input Screen.png", "Survey Screen.png", "Stress Result Screen.png"],
-  "Wellness & Gaming": ["Home Dashboard.png", "Wellness Recommendations.png", "Emotion Locker.png", "Gamification & Rewards.png", "Profile & Wellness Trends.png"]
-};
-
-type CategoryKey = keyof typeof LUMIN_CATEGORIES;
-
 export default function UiUxProjects() {
   const [luminLightboxIndex, setLuminLightboxIndex] = useState<number | null>(null);
   const [jvoLightboxIndex, setJvoLightboxIndex] = useState<number | null>(null);
@@ -189,9 +180,6 @@ export default function UiUxProjects() {
   // State for Interactive Mobile App Simulator
   const [activeFeatureIdx, setActiveFeatureIdx] = useState(2); // Default to Dashboard (index 2)
   const [activePhoneScreen, setActivePhoneScreen] = useState("Home Dashboard.png");
-  
-  // State for Tabbed Screen Explorer
-  const [activeTab, setActiveTab] = useState<CategoryKey>("All");
 
   const activeFeature = LUMIN_FEATURES[activeFeatureIdx];
   const activeColorTheme = colorMap[activeFeature.accentClass];
@@ -526,97 +514,13 @@ export default function UiUxProjects() {
                 })}
               </div>
 
-            </div>
-
-          </div>
-
-          {/* ========================================================================= */}
-          {/* Complete System Screens Tabbed Explorer Grid                             */}
-          {/* ========================================================================= */}
-          <div className="mt-20">
-            <div className="mb-6 text-center">
-              <span className="text-[10px] font-semibold text-purple-400 uppercase tracking-widest font-mono">System Directory</span>
-              <h3 className="text-xl font-bold tracking-tight text-white mt-1">All Lumin Mind Project Screens</h3>
-              <p className="text-xs text-gray-400 max-w-md mx-auto mt-1 leading-relaxed">
-                Filter and browse the full application blueprint. Click on any screen card to launch the hi-res zooming Lightbox.
-              </p>
-            </div>
-
-            {/* Segmented Category Filter Tabs */}
-            <div className="flex justify-center mb-8">
-              <div className="flex flex-wrap gap-1 bg-white/[0.02] border border-white/5 rounded-2xl p-1 max-w-2xl justify-center">
-                {(Object.keys(LUMIN_CATEGORIES) as CategoryKey[]).map((tab) => {
-                  const isActive = activeTab === tab;
-                  return (
-                    <button
-                      key={tab}
-                      type="button"
-                      onClick={() => setActiveTab(tab)}
-                      className={`relative px-4 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all cursor-pointer select-none ${
-                        isActive
-                          ? "bg-purple-500/15 border border-purple-500/20 text-purple-300 font-bold scale-102"
-                          : "border border-transparent text-gray-400 hover:text-gray-300"
-                      }`}
-                    >
-                      {tab}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Filtered Grid Display */}
-            <motion.div 
-              layout
-              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 py-4"
-            >
-              <AnimatePresence mode="popLayout">
-                {LUMIN_CATEGORIES[activeTab].map((screen) => (
-                  <motion.div
-                    key={screen}
-                    layout
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.3 }}
-                    className="group"
-                  >
-                    {/* Mini device container */}
-                    <div 
-                      onClick={() => openLuminLightboxForScreen(screen)}
-                      className="relative overflow-hidden rounded-2xl border border-white/5 bg-neutral-950 aspect-[9/19.5] w-full shadow-lg group-hover:border-purple-500/30 group-hover:shadow-[0_10px_25px_rgba(168,85,247,0.1)] transition-all duration-300 ease-out cursor-pointer"
-                    >
-                      {/* Screen Image */}
-                      <div className="relative h-full w-full overflow-hidden">
-                        <Image
-                          src={`/uiux/lumin-mind/${encodeURIComponent(screen)}`}
-                          alt={screen}
-                          fill
-                          quality={75}
-                          sizes="180px"
-                          className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                        />
-                        
-                        {/* Zoom overlay */}
-                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[1px]">
-                          <ZoomIn className="h-5 w-5 text-purple-300 scale-95 group-hover:scale-100 transition-transform" />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Miniature caption text */}
-                    <p className="mt-2 text-center text-[10px] font-semibold text-gray-500 group-hover:text-purple-300 transition-colors truncate px-1 select-none">
-                      {screen.replace('.png', '')}
-                    </p>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </motion.div>
           </div>
 
         </div>
 
       </div>
+
+    </div>
 
       {/* ========================================================================= */}
       {/* LUMIN MIND (MOBILE APP) LIGHTBOX MODAL                                    */}
