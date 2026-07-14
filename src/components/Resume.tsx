@@ -37,6 +37,7 @@ interface ExperienceItem {
   location: string;
   desc: string[];
   icon: React.ReactNode;
+  logo?: string;
 }
 
 interface SkillCategory {
@@ -52,7 +53,7 @@ interface MarketingProject {
   tools: string[];
   outcomes: string[];
   image: string;
-  accent: "emerald" | "amber" | "cyan";
+  accent: "emerald" | "amber" | "cyan" | "orange";
 }
 
 const accentStyles: Record<
@@ -78,6 +79,11 @@ const accentStyles: Record<
     ring: "group-hover:border-cyan-400/50",
     fallback: "from-cyan-500/25 to-blue-800/30",
   },
+  orange: {
+    badge: "text-orange-300 bg-orange-500/15",
+    ring: "group-hover:border-orange-400/50",
+    fallback: "from-orange-500/25 to-amber-800/30",
+  },
 };
 
 const marketingValueCards = [
@@ -100,6 +106,22 @@ const marketingValueCards = [
 
 export default function Resume() {
   const experiences: ExperienceItem[] = [
+    {
+      role: "Chief Marketing Officer (CMO)",
+      company: "Ad Gaari",
+      date: "01/2026 - Present",
+      location: "Faisalabad, Pakistan",
+      desc: [
+        "Lead brand strategy, marketing planning and business growth initiatives.",
+        "Manage social media, content creation and digital marketing campaigns.",
+        "Develop customer and driver acquisition strategies.",
+        "Build partnerships with brands, agencies and business clients.",
+        "Conduct market research and support pricing, sales and campaign proposals.",
+        "Coordinate with design, sales and operations teams to achieve company goals.",
+      ],
+      icon: <Target className="h-5 w-5 text-orange-400" />,
+      logo: "/brands/ad-gaari.png",
+    },
     {
       role: "Media Head",
       company: "NUML University Faisalabad Campus",
@@ -205,6 +227,23 @@ export default function Resume() {
   ];
 
   const marketingProjects: MarketingProject[] = [
+    {
+      name: "Ad Gaari",
+      campaignType: "Out-of-Home & Digital Advertising Platform",
+      spotlight: "Brand Strategy, Business Growth & Acquisition Campaigns",
+      focus: "Comprehensive brand strategy, B2B agency partnerships, and dual customer & driver acquisition.",
+      tools: ["Brand Strategy", "Digital Marketing", "Acquisition Campaigns", "Market Research", "B2B Partnerships"],
+      outcomes: [
+        "Lead brand strategy, marketing planning and business growth initiatives.",
+        "Manage social media, content creation and digital marketing campaigns.",
+        "Develop customer and driver acquisition strategies.",
+        "Build partnerships with brands, agencies and business clients.",
+        "Conduct market research and support pricing, sales and campaign proposals.",
+        "Coordinate with design, sales and operations teams to achieve company goals.",
+      ],
+      image: "/brands/ad-gaari.png",
+      accent: "orange",
+    },
     {
       name: "Elieens Organic",
       campaignType: "Organic Health & Beauty",
@@ -392,8 +431,12 @@ export default function Resume() {
                   >
                     <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-start">
                       <div className="flex items-center gap-4">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-inner">
-                          {exp.icon}
+                        <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-inner">
+                          {exp.logo ? (
+                            <Image src={exp.logo} alt={exp.company} width={48} height={48} className="h-full w-full object-cover" />
+                          ) : (
+                            exp.icon
+                          )}
                         </div>
                         <div>
                           <h4 className="text-xl font-semibold text-white transition-colors group-hover:text-emerald-400">
