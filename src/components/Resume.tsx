@@ -35,6 +35,7 @@ interface ExperienceItem {
   desc: string[];
   icon: React.ReactNode;
   logo?: string;
+  previousRole?: { role: string; date: string; desc: string[] };
 }
 
 interface SkillCategory {
@@ -109,6 +110,15 @@ export default function Resume() {
       date: "July 2026 - Present",
       location: "Faisalabad, Pakistan",
       desc: ["Promoted from Digital Strategist to Chief Marketing Officer in July 2026."],
+      previousRole: {
+        role: "Digital Strategist",
+        date: "December 2025 - June 2026",
+        desc: [
+          "Developed and executed digital marketing strategies to grow brand visibility and measurable business outcomes.",
+          "Managed Meta Ads campaigns for lead generation and conversion-focused growth.",
+          "Aligned social content, rebranding initiatives, and UI/UX improvements for a stronger digital identity.",
+        ],
+      },
       icon: <Megaphone className="h-5 w-5 text-emerald-400" />,
     },
     {
@@ -138,18 +148,6 @@ export default function Resume() {
         "Oversee social media coverage and digital engagement campaigns for campus events.",
       ],
       icon: <Briefcase className="h-5 w-5 text-indigo-400" />,
-    },
-    {
-      role: "Digital Strategist",
-      company: "JVO LABS",
-      date: "December 2025 - June 2026",
-      location: "Faisalabad, Pakistan",
-      desc: [
-        "Developed and executed digital marketing strategies to grow brand visibility and measurable business outcomes.",
-        "Managed Meta Ads campaigns for lead generation and conversion-focused growth.",
-        "Aligned social content, rebranding initiatives, and UI/UX improvements for a stronger digital identity.",
-      ],
-      icon: <Megaphone className="h-5 w-5 text-emerald-400" />,
     },
     {
       role: "Digital Marketing Intern",
@@ -442,22 +440,29 @@ export default function Resume() {
                         </div>
                         <div>
                           <h4 className="text-xl font-semibold text-white transition-colors group-hover:text-emerald-400">
-                            {exp.role}
+                            {exp.previousRole ? exp.company : exp.role}
                           </h4>
-                          <h5 className="font-medium text-gray-400">{exp.company}</h5>
+                          <h5 className="font-medium text-gray-400">{exp.previousRole ? "Career progression" : exp.company}</h5>
                         </div>
                       </div>
 
                       <div className="text-left md:text-right">
                         <div className="mb-2 inline-block rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-gray-300">
-                          {exp.date}
+                          {exp.previousRole ? "December 2025 - Present" : exp.date}
                         </div>
                         {exp.location ? <p className="text-xs text-gray-500">{exp.location}</p> : null}
                       </div>
                     </div>
 
+                    {exp.previousRole ? (
+                      <div className="mb-4 md:pl-16">
+                        <span className="mb-2 inline-block rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">Promoted</span>
+                        <h5 className="text-lg font-semibold text-white">{exp.role}</h5>
+                        <p className="mt-1 text-sm text-gray-400">{exp.date}</p>
+                      </div>
+                    ) : null}
                     {exp.desc.length > 0 ? (
-                      <ul className="space-y-3 pl-16">
+                      <ul className="space-y-3 md:pl-16">
                         {exp.desc.map((item) => (
                           <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-gray-400 md:text-base">
                             <div className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-600" />
@@ -465,6 +470,21 @@ export default function Resume() {
                           </li>
                         ))}
                       </ul>
+                    ) : null}
+                    {exp.previousRole ? (
+                      <div className="mt-6 border-t border-white/10 pt-6 md:ml-16">
+                        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500">Previous role</p>
+                        <h5 className="text-lg font-semibold text-white">{exp.previousRole.role}</h5>
+                        <p className="mt-1 text-sm text-gray-400">{exp.previousRole.date}</p>
+                        <ul className="mt-4 space-y-3">
+                          {exp.previousRole.desc.map((item) => (
+                            <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-gray-400 md:text-base">
+                              <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-600" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     ) : null}
                   </motion.div>
                 ))}
