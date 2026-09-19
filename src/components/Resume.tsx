@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Award,
   BarChart3,
@@ -53,6 +54,7 @@ interface MarketingProject {
   outcomes: string[];
   image: string;
   containImage?: boolean;
+  caseStudy?: string;
   accent: "emerald" | "amber" | "cyan" | "orange";
 }
 
@@ -234,6 +236,7 @@ export default function Resume() {
   const marketingProjects: MarketingProject[] = [
     {
       name: "Dripy.pk",
+      caseStudy: "/case-studies/dripy",
       campaignType: "Dessert Brand",
       spotlight: "Creative branding + campaign design",
       focus: "Dessert-focused creative branding and marketing campaign visuals.",
@@ -251,6 +254,7 @@ export default function Resume() {
     },
     {
       name: "Givmoo",
+      caseStudy: "/case-studies/givmoo",
       campaignType: "US Marketplace",
       spotlight: "Marketplace branding + campaign creatives",
       focus: "Creative branding and marketing campaign design for a US marketplace.",
@@ -315,6 +319,7 @@ export default function Resume() {
     },
     {
       name: "JVO Labs",
+      caseStudy: "/case-studies/jvo-labs",
       campaignType: "Software & Digital Services",
       spotlight: "Complete rebranding and digital identity modernization",
       focus: "Full rebranding and digital brand consistency program.",
@@ -775,6 +780,7 @@ export default function Resume() {
                       </li>
                     ))}
                   </ul>
+                  {project.caseStudy ? <Link href={project.caseStudy} className="mt-6 inline-flex items-center gap-2 rounded-xl border border-emerald-400/30 bg-emerald-400/10 px-5 py-3 text-sm font-semibold text-emerald-300 hover:bg-emerald-400/20">View Case Study <span aria-hidden="true">&rarr;</span></Link> : null}
                 </motion.article>
               );
             })}

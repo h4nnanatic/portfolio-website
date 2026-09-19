@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { User, Briefcase, MonitorSmartphone, Image as ImageIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
@@ -12,6 +13,7 @@ const NAV_ITEMS = [
 ];
 
 export default function FloatingNav() {
+  const pathname = usePathname();
   const [activeSection, setActiveSection] = useState("about");
   const [isVisible, setIsVisible] = useState(false);
 
@@ -43,6 +45,8 @@ export default function FloatingNav() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  if (pathname !== "/") return null;
 
   return (
     <motion.div
