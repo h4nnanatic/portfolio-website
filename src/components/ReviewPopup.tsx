@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { Minus, MessageSquareQuote } from "lucide-react";
 
@@ -44,26 +44,33 @@ const reviews = [
   },
 ];
 
+const subscribeToMount = () => () => {};
+const clientSnapshot = () => true;
+const serverSnapshot = () => false;
+
 export default function ReviewPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [hasClosed, setHasClosed] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [inAbout, setInAbout] = useState(false);
 
-  const [mounted] = useState(() => typeof window !== "undefined");
+  const mounted = useSyncExternalStore(subscribeToMount, clientSnapshot, serverSnapshot);
 
   // Watch for when user scrolls to the Resume/About section
   useEffect(() => {
     if (!mounted) return;
 
-    const resumeSection = document.querySelector<HTMLElement>("#about-section");
+    const resumeSection = document.querySelector<HTMLElement>("#about-heading");
     if (!resumeSection) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setInAbout(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          setInAbout(true);
+          observer.disconnect();
+        }
       },
-      { threshold: 0.2 }
+      { threshold: 0, rootMargin: "0px 0px -10% 0px" }
     );
 
     observer.observe(resumeSection);
@@ -95,7 +102,7 @@ export default function ReviewPopup() {
   if (!mounted) return null;
 
   return createPortal(
-    <div className="pointer-events-none fixed bottom-8 right-8 z-[99999] flex flex-col items-end justify-end">
+    <div className="pointer-events-none fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[99999] flex flex-col items-end justify-end">
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -103,7 +110,7 @@ export default function ReviewPopup() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="pointer-events-auto relative w-[340px] overflow-hidden rounded-2xl border border-[#10b981]/20 bg-[#0d130f] p-6 shadow-2xl shadow-[#10b981]/10 backdrop-blur-xl sm:w-[400px]"
+            className="pointer-events-auto relative w-[calc(100vw-2rem)] max-h-[80dvh] overflow-y-auto overflow-hidden rounded-2xl border border-[#10b981]/20 bg-[#0d130f] p-6 shadow-2xl shadow-[#10b981]/10 backdrop-blur-xl sm:w-[400px]"
           >
             {/* Header */}
             <div className="mb-6 flex items-start justify-between">
@@ -112,6 +119,7 @@ export default function ReviewPopup() {
                 <h4 className="text-lg font-bold leading-tight text-white">Founder feedback from<br />high-velocity builds.</h4>
               </div>
               <button
+                aria-label="Minimize client reviews"
                 onClick={handleClose}
                 className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
               >
@@ -149,6 +157,8 @@ export default function ReviewPopup() {
                 {reviews.map((_, idx) => (
                   <button
                     key={idx}
+                    aria-label={`Show review ${idx + 1}`}
+                    aria-pressed={idx === currentIndex}
                     onClick={() => setCurrentIndex(idx)}
                     className={`h-1.5 rounded-full transition-all duration-300 ${
                       idx === currentIndex ? "w-4 bg-[#10b981]" : "w-1.5 bg-white/20 hover:bg-white/40"

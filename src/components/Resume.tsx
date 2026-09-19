@@ -25,6 +25,7 @@ import {
   Images,
 } from "lucide-react";
 import StatsBox from "./StatsBox";
+import Services, { projectInquiryUrl } from "./Services";
 import ReviewPopup from "./ReviewPopup";
 
 interface ExperienceItem {
@@ -125,15 +126,15 @@ export default function Resume() {
     {
       role: "Chief Marketing Officer (CMO)",
       company: "Ad Gaari",
-      date: "05/2026 - Present",
+      date: "May 2026 - August 2026",
       location: "Faisalabad, Pakistan",
       desc: [
-        "Lead brand strategy, marketing planning and business growth initiatives.",
-        "Manage social media, content creation and digital marketing campaigns.",
-        "Develop customer and driver acquisition strategies.",
-        "Build partnerships with brands, agencies and business clients.",
-        "Conduct market research and support pricing, sales and campaign proposals.",
-        "Coordinate with design, sales and operations teams to achieve company goals.",
+        "Led brand strategy, marketing planning and business growth initiatives.",
+        "Managed social media, content creation and digital marketing campaigns.",
+        "Developed customer and driver acquisition strategies.",
+        "Built partnerships with brands, agencies and business clients.",
+        "Conducted market research and supported pricing, sales and campaign proposals.",
+        "Coordinated with design, sales and operations teams to achieve company goals.",
       ],
       icon: <Target className="h-5 w-5 text-orange-400" />,
       logo: "/brands/ad-gaari.png",
@@ -357,7 +358,7 @@ export default function Resume() {
           </div>
 
           <div className="mb-6 flex flex-wrap items-center gap-6">
-            <h2 className="bg-gradient-to-br from-white via-white to-gray-500 bg-clip-text text-5xl font-extrabold tracking-tighter text-transparent md:text-7xl">
+            <h2 id="about-heading" className="bg-gradient-to-br from-white via-white to-gray-500 bg-clip-text text-5xl font-extrabold tracking-tighter text-transparent md:text-7xl">
               Hannan Rasool
             </h2>
             <a
@@ -435,11 +436,11 @@ export default function Resume() {
                   <span className="text-gray-300 transition-colors group-hover:text-white">03391500217</span>
                 </a>
 
-                <a href="https://wa.me/923391500217" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4">
+                <a href={projectInquiryUrl} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition-colors group-hover:bg-emerald-500/20 group-hover:text-emerald-400">
                     <MessageCircle className="h-4 w-4" />
                   </div>
-                  <span className="text-gray-300 transition-colors group-hover:text-white">WhatsApp</span>
+                  <span className="text-gray-300 transition-colors group-hover:text-white">Let&apos;s Discuss Your Project</span>
                 </a>
               </div>
             </div>
@@ -522,6 +523,25 @@ export default function Resume() {
                       </div>
                     ) : null}
                   </motion.div>
+                ))}
+              </div>
+            </section>
+
+            <Services />
+
+            <section id="volunteering" aria-labelledby="volunteering-heading" className="pt-8">
+              <h3 id="volunteering-heading" className="mb-8 text-3xl font-bold tracking-tight">Volunteering</h3>
+              <div className="space-y-6">
+                {[
+                  { role: "President", organization: "NUML Freelancer Society", date: "September 2026 - Present", points: ["Coordinate society activities and team collaboration around freelancing and professional development.", "Support peer learning, member engagement, and knowledge sharing."] },
+                  { role: "Creative Lead", organization: "Grow Together Pakistan", date: "August 2026 - Present", points: ["Guide creative direction and visual consistency for community communications.", "Coordinate creative contributions and promotional content for organizational initiatives."] },
+                ].map((item) => (
+                  <article key={item.organization} className="rounded-3xl border border-white/10 bg-[#111] p-6 md:p-8">
+                    <p className="text-xs font-semibold text-emerald-400">{item.date}</p>
+                    <h4 className="mt-3 text-xl font-semibold">{item.role}</h4>
+                    <p className="mt-1 text-gray-400">{item.organization}</p>
+                    <ul className="mt-5 list-disc space-y-3 pl-5 text-sm leading-relaxed text-gray-400">{item.points.map((point) => <li key={point}>{point}</li>)}</ul>
+                  </article>
                 ))}
               </div>
             </section>
