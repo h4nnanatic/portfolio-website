@@ -2,7 +2,7 @@ export interface CaseStudy {
   slug: string; name: string; title: string; summary: string; role: string; sector: string; image: string;
   sections: { title: string; text: string; points?: string[] }[];
   contributions: string[];
-  metrics?: { value: string; label: string }[];
+  gallery?: { src: string; alt: string; caption: string; width: number; height: number }[];
 }
 export const caseStudies: CaseStudy[] = [
   {
@@ -10,13 +10,91 @@ export const caseStudies: CaseStudy[] = [
     summary: "Brand launch and digital marketing for a Faisalabad takeaway brand built around indulgent, customisable desserts.",
     role: "Brand Strategy, Creative Direction & Meta Ads", sector: "Food & Beverage / Faisalabad", image: "/brands/dripy.webp",
     contributions: ["Brand Strategy", "Creative Direction", "Social Media Design", "Meta Ads", "Content Strategy", "Campaign Management", "Copywriting", "Product Marketing", "Launch Strategy"],
-    metrics: [{ value: "30", label: "Messaging conversations" }, { value: "PKR 591.63", label: "Total campaign spend" }, { value: "PKR 19.72", label: "Cost per conversation" }],
+    gallery: [
+  {
+    "src": "/case-studies/dripy/faisalabad-launch.webp",
+    "alt": "Dripy: Faisalabad launch teaser",
+    "caption": "Faisalabad launch teaser",
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "src": "/case-studies/dripy/coming-soon.webp",
+    "alt": "Dripy: Coming soon dessert teaser",
+    "caption": "Coming soon dessert teaser",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "src": "/case-studies/dripy/dessert-tub.webp",
+    "alt": "Dripy: Chocolate and pistachio dessert visual",
+    "caption": "Chocolate and pistachio dessert visual",
+    "width": 1086,
+    "height": 1448
+  },
+  {
+    "src": "/case-studies/dripy/desserts-worth-craving.webp",
+    "alt": "Dripy: Desserts worth craving product creative",
+    "caption": "Desserts worth craving product creative",
+    "width": 1106,
+    "height": 1422
+  },
+  {
+    "src": "/case-studies/dripy/pata-lagao-daya.webp",
+    "alt": "Dripy: Pata Lagao Daya pop-culture creative",
+    "caption": "Pata Lagao Daya pop-culture creative",
+    "width": 1091,
+    "height": 1442
+  },
+  {
+    "src": "/case-studies/dripy/mogambo.webp",
+    "alt": "Dripy: Mogambo Khush Hua pop-culture creative",
+    "caption": "Mogambo Khush Hua pop-culture creative",
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "src": "/case-studies/dripy/taste-or-trust.webp",
+    "alt": "Dripy: Taste or Trust social creative",
+    "caption": "Taste or Trust social creative",
+    "width": 1198,
+    "height": 1313
+  },
+  {
+    "src": "/case-studies/dripy/gta-inspired.webp",
+    "alt": "Dripy: GTA-inspired dessert illustration",
+    "caption": "GTA-inspired dessert illustration",
+    "width": 1123,
+    "height": 1400
+  },
+  {
+    "src": "/case-studies/dripy/delivery-humour.webp",
+    "alt": "Dripy: Delivery-themed humour creative",
+    "caption": "Delivery-themed humour creative",
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "src": "/case-studies/dripy/true-love.webp",
+    "alt": "Dripy: True love dessert illustration",
+    "caption": "True love dessert illustration",
+    "width": 1086,
+    "height": 1448
+  },
+  {
+    "src": "/case-studies/dripy/social-mockup.webp",
+    "alt": "Dripy: Social-feed concept mockup",
+    "caption": "Social-feed concept mockup",
+    "width": 1024,
+    "height": 1536
+  }
+],
     sections: [
       { title: "About & brief", text: "Dripy launched with Brownie Tubs, Kunafa Tubs, Dripy Brownies, custom sauces and toppings. Its positioning was simple: Not your usual sweet spot. Desserts worth craving. My brief was to build a recognisable local brand, not just a page that sells desserts." },
       { title: "The challenge", text: "A soft launch meant starting without an established customer base and with a limited delivery radius. The brand needed to feel youthful, premium and culturally relevant while setting clear customer expectations.", points: ["Introduce a new dessert brand and build pre-launch curiosity.", "Create a consistent visual identity and memorable personality.", "Generate local awareness and WhatsApp enquiries.", "Communicate delivery limits without creating a disappointing customer experience."] },
       { title: "Brand & creative direction", text: "I developed visual communication around cream and chocolate-brown tones, minimal layouts, premium dessert photography and dripping elements inspired by the logo. Product-led work was balanced with relatable Pakistani humour and cultural references.", points: ["GTA-style concepts and Pakistani pop-culture references.", "Mogambo Khush Hua and Pata Lagao Daya campaign ideas.", "iPhone Duo comparisons, relationship humour and interactive dessert memes.", "Minimal product photography, launch announcements and delivery updates."] },
       { title: "Launch process", text: "The content plan followed the customer from curiosity to ordering.", points: ["Pre-launch: mystery-based Coming Soon visuals with partially hidden desserts.", "Soft launch: menu, pricing, location, hours and takeaway/delivery information, with clear coverage limits.", "Post-launch: actual products, offers, humour-led content and shareable posts aimed at profile visits and enquiries."] },
-      { title: "Meta Ads & local acquisition", text: "I set up and managed a Meta messaging campaign targeting customers around Faisalabad. Location-specific targeting and direct-response creative supported the CTA: Order Dripy on WhatsApp. The figures above describe one initial campaign, not total business results or sales." },
+      { title: "Meta Ads & local acquisition", text: "I set up and managed a Meta messaging campaign targeting customers around Faisalabad. Location-specific targeting and direct-response creative supported the CTA: Order Dripy on WhatsApp." },
       { title: "Customer experience", text: "Brand communication extended beyond advertising into the ordering experience. The tone stayed casual and friendly while the visuals remained premium.", points: ["Delivery availability and messages for out-of-range customers.", "Takeaway encouragement, operating hours and soft-launch expectations.", "WhatsApp ordering, product descriptions and menu communication.", "Instagram captions and engagement content."] },
       { title: "Outcome", text: "Dripy launched with a recognisable identity and a connected approach to design, social content and paid advertising. Branding, cultural content, food visuals and messaging campaigns created a foundation for organic engagement and local customer enquiries." },
     ],
