@@ -28,10 +28,10 @@ function Counter({ from, to, decimals = 0, duration = 2 }: CounterProps) {
 
 export default function StatsBox() {
   const stats = [
-    { value: 20, label: "HAPPY CLIENTS", plus: true, decimals: 0 },
-    { value: 5, label: "PROJECTS DONE", plus: true, decimals: 0 },
-    { value: 1.5, label: "YEARS EXPERIENCE", plus: true, decimals: 1 },
-    { value: 15, label: "CAMPAIGNS RUN", plus: true, decimals: 0 },
+    { value: 30, label: "HAPPY CLIENTS", plus: true, decimals: 0 },
+    { value: 10, label: "PROJECTS DONE", plus: true, decimals: 0 },
+    { value: 2, label: "YEARS EXPERIENCE", plus: true, decimals: 0 },
+    { value: 20, label: "CAMPAIGNS RUN", plus: true, decimals: 0 },
   ];
 
   return (

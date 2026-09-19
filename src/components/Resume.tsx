@@ -51,6 +51,7 @@ interface MarketingProject {
   tools: string[];
   outcomes: string[];
   image: string;
+  containImage?: boolean;
   accent: "emerald" | "amber" | "cyan" | "orange";
 }
 
@@ -230,6 +231,34 @@ export default function Resume() {
   ];
 
   const marketingProjects: MarketingProject[] = [
+    {
+      name: "Dripy.pk",
+      campaignType: "Dessert Brand",
+      spotlight: "Creative branding + campaign design",
+      focus: "Dessert-focused creative branding and marketing campaign visuals.",
+      tools: ["Creative Branding", "Campaign Design", "Visual Communication"],
+      outcomes: [
+        "Developed creative branding for a dessert-focused brand.",
+        "Created campaign visuals with a consistent brand presentation.",
+      ],
+      image: "/brands/dripy.webp",
+      containImage: true,
+      accent: "amber",
+    },
+    {
+      name: "Givmoo",
+      campaignType: "US Marketplace",
+      spotlight: "Marketplace branding + campaign creatives",
+      focus: "Creative branding and marketing campaign design for a US marketplace.",
+      tools: ["Creative Branding", "Campaign Design", "Visual Identity"],
+      outcomes: [
+        "Created branding and marketing campaign creatives for a US marketplace.",
+        "Aligned visual communication with the marketplace brand identity.",
+      ],
+      image: "/brands/givmoo.webp",
+      containImage: true,
+      accent: "orange",
+    },
     {
       name: "Ad Gaari",
       campaignType: "Out-of-Home & Digital Advertising Platform",
@@ -685,7 +714,7 @@ export default function Resume() {
                       height={720}
                       quality={72}
                       sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                      className="h-44 w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className={project.containImage ? "h-44 w-full object-contain bg-black p-3" : "h-44 w-full object-cover transition-transform duration-700 group-hover:scale-105"}
                     />
                   </div>
 
