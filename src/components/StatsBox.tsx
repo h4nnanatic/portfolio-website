@@ -40,7 +40,7 @@ export default function StatsBox() {
       <div className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-900/20 via-transparent to-transparent blur-2xl" />
       
       <div className="relative z-10 grid grid-cols-2 gap-y-10 md:grid-cols-4 md:divide-x md:divide-emerald-900/50">
-        {stats.map((stat, index) => (
+        {stats.map((stat) => (
           <div key={stat.label} className="flex flex-col items-center justify-center relative">
             <div className="flex items-baseline text-4xl font-bold text-emerald-400 md:text-5xl">
               <Counter from={0} to={stat.value} decimals={stat.decimals} />

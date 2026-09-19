@@ -50,11 +50,7 @@ export default function ReviewPopup() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [inAbout, setInAbout] = useState(false);
 
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const [mounted] = useState(() => typeof window !== "undefined");
 
   // Watch for when user scrolls to the Resume/About section
   useEffect(() => {
@@ -76,13 +72,10 @@ export default function ReviewPopup() {
 
   // Trigger popup when About section is in view
   useEffect(() => {
-    let timer: NodeJS.Timeout;
     if (inAbout && !hasClosed) {
-      timer = setTimeout(() => setIsOpen(true), 1000);
-    } else {
-      setIsOpen(false);
+      const timer = setTimeout(() => setIsOpen(true), 1000);
+      return () => clearTimeout(timer);
     }
-    return () => clearTimeout(timer);
   }, [inAbout, hasClosed]);
 
   // Auto-cycle reviews
@@ -141,7 +134,7 @@ export default function ReviewPopup() {
                   </div>
                   
                   <p className="mb-6 text-sm leading-relaxed text-gray-300">
-                    "{reviews[currentIndex].text}"
+                    &quot;{reviews[currentIndex].text}&quot;
                   </p>
                   
                   <div>

@@ -14,7 +14,6 @@ import {
   LayoutTemplate,
   Layers3,
   Mail,
-  MapPin,
   Megaphone,
   MessageCircle,
   MonitorPlay,
@@ -27,8 +26,6 @@ import {
 } from "lucide-react";
 import StatsBox from "./StatsBox";
 import ReviewPopup from "./ReviewPopup";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
 
 interface ExperienceItem {
   role: string;
@@ -108,6 +105,14 @@ export default function Resume() {
   const experiences: ExperienceItem[] = [
     {
       role: "Chief Marketing Officer (CMO)",
+      company: "JVO LABS",
+      date: "July 2026 - Present",
+      location: "Faisalabad, Pakistan",
+      desc: ["Promoted from Digital Strategist to Chief Marketing Officer in July 2026."],
+      icon: <Megaphone className="h-5 w-5 text-emerald-400" />,
+    },
+    {
+      role: "Chief Marketing Officer (CMO)",
       company: "Ad Gaari",
       date: "05/2026 - Present",
       location: "Faisalabad, Pakistan",
@@ -137,7 +142,7 @@ export default function Resume() {
     {
       role: "Digital Strategist",
       company: "JVO LABS",
-      date: "12/2025 - Present",
+      date: "December 2025 - June 2026",
       location: "Faisalabad, Pakistan",
       desc: [
         "Developed and executed digital marketing strategies to grow brand visibility and measurable business outcomes.",
@@ -290,11 +295,8 @@ export default function Resume() {
     },
   ];
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { amount: 0.1, once: false });
-
   return (
-    <div ref={containerRef} id="about-section" className="relative z-20 min-h-screen overflow-hidden bg-transparent px-6 py-28 md:py-32">
+    <div id="about-section" className="relative z-20 min-h-screen overflow-hidden bg-transparent px-6 py-28 md:py-32">
       <ReviewPopup />
       <motion.div
         animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}

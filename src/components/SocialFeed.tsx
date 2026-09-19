@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Instagram, ExternalLink, Loader2 } from "lucide-react";
 
 // Behold API response types
@@ -131,11 +132,12 @@ export default function SocialFeed() {
 
                 <div className="relative aspect-square w-full overflow-hidden bg-neutral-900">
                   {post.image ? (
-                    <img
+                    <Image
                       src={post.image}
                       alt="Instagram post"
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      loading="lazy"
+                      fill
+                      unoptimized
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-neutral-800 to-neutral-900">

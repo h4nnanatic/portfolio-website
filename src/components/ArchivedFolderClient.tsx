@@ -44,6 +44,8 @@ export default function ArchivedFolderClient({ images = [] }: ArchivedFolderClie
   // Keyboard navigation for Lightbox inside Folder
   useEffect(() => {
     if (lightboxIndex === null) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -56,7 +58,10 @@ export default function ArchivedFolderClient({ images = [] }: ArchivedFolderClie
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
   }, [lightboxIndex, filteredImages.length]);
 
   const goNextLightbox = (e: React.MouseEvent) => {
@@ -275,7 +280,7 @@ export default function ArchivedFolderClient({ images = [] }: ArchivedFolderClie
             <button
               type="button"
               onClick={goPrevLightbox}
-              className="absolute left-6 z-50 hidden h-14 w-14 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white transition-all hover:bg-white/15 hover:scale-105 cursor-pointer md:flex"
+              className="absolute left-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white transition-all hover:bg-white/15 hover:scale-105 cursor-pointer"
               aria-label="Previous image"
             >
               <ChevronLeft className="h-6 w-6" />
@@ -284,7 +289,7 @@ export default function ArchivedFolderClient({ images = [] }: ArchivedFolderClie
             <button
               type="button"
               onClick={goNextLightbox}
-              className="absolute right-6 z-50 hidden h-14 w-14 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white transition-all hover:bg-white/15 hover:scale-105 cursor-pointer md:flex"
+              className="absolute right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white transition-all hover:bg-white/15 hover:scale-105 cursor-pointer"
               aria-label="Next image"
             >
               <ChevronRight className="h-6 w-6" />
@@ -296,7 +301,7 @@ export default function ArchivedFolderClient({ images = [] }: ArchivedFolderClie
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 28 }}
-              className="relative max-h-[80vh] max-w-[95vw] aspect-[3/4] w-full"
+              className="relative h-[72dvh] w-[95vw] max-w-7xl"
               onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image
             >
               <Image
@@ -322,7 +327,7 @@ export default function ArchivedFolderClient({ images = [] }: ArchivedFolderClie
             
             {/* Mobile swipe controls indicator */}
             <span className="absolute bottom-16 text-center text-xs text-gray-500 font-mono tracking-wider pointer-events-none md:hidden">
-              Swipe or tap arrows to navigate
+              Tap arrows to navigate
             </span>
 
           </motion.div>

@@ -7,12 +7,18 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  || (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Hannan Rasool Portfolio",
-  description: "A high-end scrollytelling personal portfolio",
+  description: "Explore Hannan Rasool’s work in marketing leadership, brand strategy, graphic design, and creative campaigns.",
   openGraph: {
     title: "Hannan Rasool Portfolio",
-    description: "A high-end scrollytelling personal portfolio",
+    description: "Explore Hannan Rasool’s work in marketing leadership, brand strategy, graphic design, and creative campaigns.",
     images: [
       {
         url: "/og-image.jpg",
@@ -25,7 +31,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Hannan Rasool Portfolio",
-    description: "A high-end scrollytelling personal portfolio",
+    description: "Explore Hannan Rasool’s work in marketing leadership, brand strategy, graphic design, and creative campaigns.",
     images: ["/og-image.jpg"],
   },
 };

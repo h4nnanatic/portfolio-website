@@ -7,9 +7,7 @@ import {
   Sparkles, 
   X, 
   ArrowUpRight,
-  ZoomIn,
-  Smartphone,
-  Globe
+  ZoomIn
 } from "lucide-react";
 
 export default function UiUxProjects() {

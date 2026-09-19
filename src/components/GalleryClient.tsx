@@ -12,9 +12,7 @@ import {
   ChevronDown, 
   ChevronUp, 
   Sparkles, 
-  Layers, 
   Info,
-  ArrowRight,
   PlusCircle,
   FileImage
 } from "lucide-react";
@@ -256,7 +254,7 @@ export default function GalleryClient({ activeImages = [], archivedImages = [] }
                 </h3>
                 
                 <p className="text-emerald-300/80 font-medium text-sm md:text-base mb-6 leading-relaxed">
-                  "Suno! Yahan jald hi mere bilkul naye graphic design projects aur posters showcase honge. Tab tak ke liye, aap niche diye gaye exclusive digital folder ko open karke mera purana graphic design work explore kar sakte hain!"
+                  &quot;Suno! Yahan jald hi mere bilkul naye graphic design projects aur posters showcase honge. Tab tak ke liye, aap niche diye gaye exclusive digital folder ko open karke mera purana graphic design work explore kar sakte hain!&quot;
                 </p>
 
                 <p className="text-gray-400 text-xs md:text-sm mb-8">

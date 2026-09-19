@@ -47,6 +47,8 @@ export default function CreativeShowcaseClient({ images = [] }: CreativeShowcase
   // Keyboard navigation for Lightbox
   useEffect(() => {
     if (lightboxIndex === null) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -59,7 +61,10 @@ export default function CreativeShowcaseClient({ images = [] }: CreativeShowcase
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
   }, [lightboxIndex, images.length]);
 
   const goNext = () => {
@@ -269,7 +274,7 @@ export default function CreativeShowcaseClient({ images = [] }: CreativeShowcase
                 </h3>
                 
                 <p className="text-emerald-300/80 font-medium text-sm md:text-base mb-6 leading-relaxed">
-                  "Suno! Yahan jald hi mere bilkul naye graphic design projects aur posters showcase honge. Tab tak ke liye, aap niche diye gaye exclusive digital folder ko open karke mera purana graphic design work explore kar sakte hain!"
+                  &quot;Suno! Yahan jald hi mere bilkul naye graphic design projects aur posters showcase honge. Tab tak ke liye, aap niche diye gaye exclusive digital folder ko open karke mera purana graphic design work explore kar sakte hain!&quot;
                 </p>
 
                 <p className="text-gray-400 text-xs md:text-sm mb-8">
@@ -353,7 +358,7 @@ export default function CreativeShowcaseClient({ images = [] }: CreativeShowcase
             <button
               type="button"
               onClick={goPrevLightbox}
-              className="absolute left-6 z-50 hidden h-14 w-14 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white transition-all hover:bg-white/15 hover:scale-105 cursor-pointer md:flex"
+              className="absolute left-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white transition-all hover:bg-white/15 hover:scale-105 cursor-pointer"
               aria-label="Previous image"
             >
               <ChevronLeft className="h-6 w-6" />
@@ -362,7 +367,7 @@ export default function CreativeShowcaseClient({ images = [] }: CreativeShowcase
             <button
               type="button"
               onClick={goNextLightbox}
-              className="absolute right-6 z-50 hidden h-14 w-14 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white transition-all hover:bg-white/15 hover:scale-105 cursor-pointer md:flex"
+              className="absolute right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white transition-all hover:bg-white/15 hover:scale-105 cursor-pointer"
               aria-label="Next image"
             >
               <ChevronRight className="h-6 w-6" />
@@ -374,7 +379,7 @@ export default function CreativeShowcaseClient({ images = [] }: CreativeShowcase
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 28 }}
-              className="relative max-h-[80vh] max-w-[95vw] aspect-[3/4] w-full"
+              className="relative h-[72dvh] w-[95vw] max-w-7xl"
               onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image
             >
               <Image
@@ -400,7 +405,7 @@ export default function CreativeShowcaseClient({ images = [] }: CreativeShowcase
             
             {/* Mobile swipe controls indicator */}
             <span className="absolute bottom-16 text-center text-xs text-gray-500 font-mono tracking-wider pointer-events-none md:hidden">
-              Swipe or tap arrows to navigate
+              Tap arrows to navigate
             </span>
 
           </motion.div>

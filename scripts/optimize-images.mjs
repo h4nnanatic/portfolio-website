@@ -1,6 +1,6 @@
-const fs = require('fs/promises');
-const path = require('path');
-const sharp = require('sharp');
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import sharp from 'sharp';
 
 const WORK_DIR = path.join(process.cwd(), 'public', 'work');
 const THUMB_DIR = path.join(process.cwd(), 'public', 'thumbnails');
